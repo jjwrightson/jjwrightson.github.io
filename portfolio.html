@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jasmine Wrightson — Frontend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F5F0E8;
+    --ink: #1A1714;
+    --rust: #B84C2B;
+    --rust-light: #E8C4B4;
+    --warm-mid: #8C7B6B;
+    --warm-light: #D4C9BA;
+    --white: #FDFAF5;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.5;
+  }
+
+  /* ── HEADER / HERO ── */
+  header {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 2.5rem 4rem;
+    position: relative;
+    border-bottom: 1px solid var(--warm-light);
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.1s;
+  }
+
+  .logo {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: var(--warm-mid);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  nav {
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  nav a {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 300;
+    color: var(--warm-mid);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--ink); }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 0 2rem;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 300;
+    color: var(--rust);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.25s;
+  }
+
+  h1 {
+    font-size: clamp(4rem, 10vw, 9rem);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 0.35s;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--rust);
+  }
+
+  .hero-sub {
+    margin-top: 2.5rem;
+    max-width: 520px;
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: var(--warm-mid);
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.5s;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.65s;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .btn:hover { background: var(--ink); color: var(--cream); }
+
+  .btn-fill { background: var(--ink); color: var(--cream); }
+  .btn-fill:hover { background: var(--rust); border-color: var(--rust); color: var(--white); }
+
+  .hero-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.75s;
+  }
+
+  .scroll-hint {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    font-weight: 300;
+    color: var(--warm-mid);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .scroll-line {
+    width: 40px;
+    height: 1px;
+    background: var(--warm-light);
+    display: inline-block;
+    animation: grow 2s ease-in-out infinite;
+  }
+
+  .stats-row {
+    display: flex;
+    gap: 3rem;
+  }
+
+  .stat-item { text-align: right; }
+
+  .stat-num {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    font-weight: 300;
+    color: var(--warm-mid);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── SECTION SHARED ── */
+  section {
+    padding: 6rem 4rem;
+    border-bottom: 1px solid var(--warm-light);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .section-num {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    font-weight: 300;
+    color: var(--rust);
+    letter-spacing: 0.1em;
+  }
+
+  .section-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .section-title em { font-style: italic; color: var(--rust); }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: var(--warm-mid);
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+  }
+
+  .about-text p strong {
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  .skills-list {
+    list-style: none;
+  }
+
+  .skills-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--warm-light);
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--ink);
+  }
+
+  .skills-list li:first-child { border-top: 1px solid var(--warm-light); }
+
+  .skill-tag {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    font-weight: 300;
+    color: var(--warm-mid);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── CASE STUDIES ── */
+  .cases { display: flex; flex-direction: column; gap: 0; }
+
+  .case {
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--warm-light);
+    cursor: default;
+  }
+
+  .case:first-child { border-top: 1px solid var(--warm-light); }
+
+  .case-top {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 2.5rem;
+    align-items: start;
+    margin-bottom: 1.75rem;
+  }
+
+  .case:hover .case-num { color: var(--rust); }
+
+  .case-num {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 300;
+    color: var(--warm-light);
+    letter-spacing: 0.08em;
+    padding-top: 0.35rem;
+    transition: color 0.2s;
+  }
+
+  .case-body {}
+
+  .case-title-row {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .case-title {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--ink);
+  }
+
+  .case-badge {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--rust-light);
+    color: var(--rust);
+  }
+
+  .case-desc {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--warm-mid);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+
+  .pipeline {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .pipe-step {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    background: var(--white);
+    border: 1px solid var(--warm-light);
+    color: var(--warm-mid);
+  }
+
+  .pipe-arrow {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--warm-light);
+  }
+
+  /* Film strip image rows */
+  .case-imgs {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .case-imgs.strip-3 { grid-template-columns: repeat(3, 1fr); }
+  .case-imgs.strip-4 { grid-template-columns: repeat(4, 1fr); }
+
+  .case-imgs.before-after {
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    max-width: 520px;
+  }
+
+  .before-after-arrow {
+    font-family: var(--mono);
+    font-size: 1.25rem;
+    color: var(--warm-light);
+    text-align: center;
+    padding: 0 0.5rem;
+  }
+
+  .img-placeholder {
+    aspect-ratio: 4 / 3;
+    background: var(--white);
+    border: 1px solid var(--warm-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    color: var(--warm-light);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.5;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .img-placeholder img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .img-caption {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    color: var(--warm-mid);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+    text-align: center;
+  }
+
+  /* ── PROCESS ── */
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+
+  .process-step {
+    padding: 2.5rem 2rem 2.5rem 0;
+    border-right: 1px solid var(--warm-light);
+    padding-right: 2rem;
+  }
+
+  .process-step:last-child { border-right: none; }
+  .process-step:not(:first-child) { padding-left: 2rem; }
+
+  .process-step-num {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    font-weight: 300;
+    color: var(--rust);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .process-step-title {
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .process-step-desc {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--warm-mid);
+    line-height: 1.7;
+  }
+
+  /* ── CONTACT ── */
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .contact-text {
+    font-size: 1.75rem;
+    font-weight: 300;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+
+  .contact-text em { font-style: italic; color: var(--rust); }
+
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--warm-light);
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 1rem;
+    font-weight: 300;
+    transition: color 0.2s;
+  }
+
+  .contact-link:first-child { border-top: 1px solid var(--warm-light); }
+  .contact-link:hover { color: var(--rust); }
+
+  .contact-link-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    font-weight: 300;
+    color: var(--warm-mid);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    font-weight: 300;
+    color: var(--warm-mid);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes grow {
+    0%, 100% { width: 30px; opacity: 0.4; }
+    50% { width: 50px; opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    header { padding: 2rem; }
+    section { padding: 4rem 2rem; }
+    footer { padding: 1.5rem 2rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .process-grid { grid-template-columns: 1fr 1fr; }
+    .case-top { grid-template-columns: 60px 1fr; }
+    .case-imgs.strip-4 { grid-template-columns: repeat(2, 1fr); }
+    nav { gap: 1.5rem; }
+    .stats-row { gap: 1.5rem; }
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 1.5rem; min-height: auto; padding-bottom: 3rem; }
+    section { padding: 3rem 1.5rem; }
+    nav { display: none; }
+    .process-grid { grid-template-columns: 1fr; }
+    .case-top { grid-template-columns: 1fr; gap: 0.5rem; }
+    .case-num { display: none; }
+    .case-imgs.strip-3, .case-imgs.strip-4 { grid-template-columns: repeat(2, 1fr); }
+    .case-imgs.before-after { grid-template-columns: 1fr; max-width: 100%; }
+    .before-after-arrow { display: none; }
+    h1 { font-size: 3.5rem; }
+    .hero-footer { flex-direction: column; gap: 2rem; }
+    .stats-row { flex-direction: column; gap: 1rem; }
+    .stat-item { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<header>
+  <div class="header-top">
+    <span class="logo">Jasmine.dev</span>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Developer &amp; Design-to-Code Specialist</p>
+    <h1>Jasmine<br><em>Wrightson</em></h1>
+    <p class="hero-sub">I take Photoshop designs and bring them to life as fully interactive, personalised products. Based in the UK, working at the intersection of design craft and frontend engineering.</p>
+    <div class="hero-actions">
+      <a href="your-cv.pdf" class="btn btn-fill" download>Download CV</a>
+      <a href="https://www.linkedin.com/in/jasmine-wrightson-81663322a/" class="btn" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="#contact" class="btn">Get in touch</a>
+    </div>
+  </div>
+
+  <div class="hero-footer">
+    <span class="scroll-hint"><span class="scroll-line"></span> Scroll to explore</span>
+    <div class="stats-row">
+      <div class="stat-item">
+        <span class="stat-num">99%</span>
+        <span class="stat-label">Live products shipped</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">50+</span>
+        <span class="stat-label">Unique themes</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">2+</span>
+        <span class="stat-label">Years in role</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About <em>me</em></h2>
+  </div>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>I'm a frontend developer who works at the <strong>intersection of design and engineering</strong> — taking detailed Photoshop concepts from a marketing team and translating them into fully configured, interactive products that customers can personalise and purchase.</p>
+      <p>Most developers either design or they code. I do both — reading layered PSD files, understanding design intent, and expressing that precisely through platform-specific configuration and scripting.". I've been the <strong>sole person responsible</strong> for getting 99% of a live print-on-demand catalogue into production.</p>
+      <p>I'm now looking for a new role where that rare combination — design literacy plus technical execution at scale — is genuinely valued.</p>
+    </div>
+    <ul class="skills-list">
+<li>Mediaclip JS engine <span class="skill-tag">Specialisation</span></li>
+<li>Platform configuration <span class="skill-tag">Scripting & logic</span></li>
+<li>Adobe Photoshop <span class="skill-tag">Daily use</span></li>
+<li>Design translation <span class="skill-tag">PSD → live product</span></li>
+<li>Theme & variant logic <span class="skill-tag">Foil, colour, format</span></li>
+<li>Print-on-demand <span class="skill-tag">Industry</span></li>
+<li>E-commerce <span class="skill-tag">Domain</span></li>
+<li>HTML & CSS <span class="skill-tag">Frontend</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── WORK ── -->
+<section id="work">
+  <div class="section-header reveal">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Selected <em>work</em></h2>
+  </div>
+
+  <div class="cases">
+
+    <!-- CASE 1 -->
+    <div class="case reveal">
+      <div class="case-top">
+        <span class="case-num">001</span>
+        <div class="case-body">
+          <div class="case-title-row">
+            <h3 class="case-title">Foil Photobooks</h3>
+            <span class="case-badge">Flagship launch</span>
+          </div>
+          <p class="case-desc">Built an entirely new product category for the business from scratch — designing and integrating a foil photobook experience including the designer configuration, rendering pipeline, and launch of 41 designs. 11 of those designs I created personally in Photoshop before building them in code. The range has generated approximately <strong>£24,400 in net sales</strong> (867 items, 585 orders). I continue to monitor all foil orders and proactively fix customer errors to protect fulfilment quality — work well beyond a standard developer remit.</p>
+          <div class="pipeline">
+            <span class="pipe-step">New format scoped</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">11 designs in Photoshop</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Designer integration</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Rendering pipeline</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">41 designs live</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Ongoing QA</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-imgs strip-3">
+        <div>
+          <div class="img-placeholder">Photoshop<br>layers / PSD</div>
+          <p class="img-caption">Design file</p>
+        </div>
+        <div>
+          <div class="img-placeholder">Live in<br>Mediaclip<br>designer</div>
+          <p class="img-caption">Designer view</p>
+        </div>
+        <div>
+          <div class="img-placeholder">Finished<br>product<br>mockup</div>
+          <p class="img-caption">Final product</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE 2 -->
+    <div class="case reveal">
+      <div class="case-top">
+        <span class="case-num">002</span>
+        <div class="case-body">
+          <div class="case-title-row">
+            <h3 class="case-title">Polaroid Boxes</h3>
+            <span class="case-badge">Beyond job description</span>
+          </div>
+          <p class="case-desc">Conceptualised, designed, and coded a brand new product format using a dieline-based designer experience never previously used at the company. Built the Illustrator files for the VeloBlade cutting machine, physically operated the machine to produce test samples, and wrote full step-by-step production documentation for the production team. Also created all marketing mock-ups used on every product page — removing the need for a photography shoot. 130 products set up since launch in February 2026; <strong>93 items sold across 22 orders</strong>. This project spanned hardware, production, design, documentation, and software.</p>
+          <div class="pipeline">
+            <span class="pipe-step">Concept &amp; design</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Illustrator dieline</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">VeloBlade testing</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Production docs</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Designer config</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Marketing mock-ups</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">130 products live</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-imgs strip-4">
+        <div>
+          <div class="img-placeholder">Illustrator<br>dieline file</div>
+          <p class="img-caption">Dieline</p>
+        </div>
+        <div>
+          <div class="img-placeholder">Physical<br>test sample</div>
+          <p class="img-caption">VeloBlade sample</p>
+        </div>
+        <div>
+          <div class="img-placeholder">Live in<br>Mediaclip<br>designer</div>
+          <p class="img-caption">Designer view</p>
+        </div>
+        <div>
+          <div class="img-placeholder">Marketing<br>mock-up</div>
+          <p class="img-caption">Product page image</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE 3 -->
+    <div class="case reveal">
+      <div class="case-top">
+        <span class="case-num">003</span>
+        <div class="case-body">
+          <div class="case-title-row">
+            <h3 class="case-title">Weddings range</h3>
+            <span class="case-badge">Strategic project</span>
+          </div>
+          <p class="case-desc">Led the technical delivery of a new Weddings range projected to generate <strong>£80,000 per year</strong> in revenue — a project that cannot launch without my involvement. Dedicated 24+ hours in early 2026 to learning VDP (variable data printing) products in Mediaclip from scratch, a method entirely new to me. Worked directly with Mediaclip to resolve platform-level issues that were blocking the launch. Currently building a custom wedding menu for a distinct on-site experience. 23 designs across the first two product types already created, covering a planned range of 27 distinct product types.</p>
+          <div class="pipeline">
+            <span class="pipe-step">New method learned</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Mediaclip liaison</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">23 designs built</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Custom menu UI</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">27 product types planned</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-imgs before-after">
+        <div>
+          <div class="img-placeholder">PSD design<br>from marketing</div>
+          <p class="img-caption">Before — Photoshop</p>
+        </div>
+        <span class="before-after-arrow">→</span>
+        <div>
+          <div class="img-placeholder">Live in<br>Mediaclip<br>designer</div>
+          <p class="img-caption">After — Designer</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE 4 -->
+    <div class="case reveal">
+      <div class="case-top">
+        <span class="case-num">004</span>
+        <div class="case-body">
+          <div class="case-title-row">
+            <h3 class="case-title">Coffee Table Photobooks</h3>
+            <span class="case-badge">Scale &amp; revenue</span>
+          </div>
+          <p class="case-desc">Created 105 new coffee table photobook designs since March 2025, each configured end-to-end through the Mediaclip platform. The range has generated approximately <strong>£19,230 in net sales</strong> (771 items, 530 orders) across the period — running alongside all other project work with no drop in output or quality.</p>
+          <div class="pipeline">
+            <span class="pipe-step">105 designs</span>
+            <span class="pipe-arrow">·</span>
+            <span class="pipe-step">Full pipeline each</span>
+            <span class="pipe-arrow">·</span>
+            <span class="pipe-step">530 orders fulfilled</span>
+            <span class="pipe-arrow">·</span>
+            <span class="pipe-step">£19,230 net sales</span>
+          </div>
+        </div>
+      </div>
+      <div class="case-imgs strip-3">
+        <div>
+          <div class="img-placeholder">Variety grid —<br>multiple designs</div>
+          <p class="img-caption">Range overview</p>
+        </div>
+        <div>
+          <div class="img-placeholder">PSD design<br>file</div>
+          <p class="img-caption">Before — Photoshop</p>
+        </div>
+        <div>
+          <div class="img-placeholder">Live product<br>in designer</div>
+          <p class="img-caption">After — Live</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── PROCESS ── -->
+<section id="process">
+  <div class="section-header reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-title">How I <em>work</em></h2>
+  </div>
+  <div class="process-grid">
+    <div class="process-step reveal">
+      <span class="process-step-num">Step 01</span>
+      <h3 class="process-step-title">Read the design</h3>
+      <p class="process-step-desc">I start in Photoshop — understanding layer structure, font choices, colour intent, and how the design should behave when personalised.</p>
+    </div>
+    <div class="process-step reveal">
+      <span class="process-step-num">Step 02</span>
+      <h3 class="process-step-title">Extract assets</h3>
+      <p class="process-step-desc">Clipart, backgrounds, and elements are prepared and exported. Fonts are identified and loaded. Foil and colour variants are mapped out.</p>
+    </div>
+    <div class="process-step reveal">
+      <span class="process-step-num">Step 03</span>
+      <h3 class="process-step-title">Configure in JS</h3>
+      <p class="process-step-desc">The Mediaclip theme is built in JavaScript — selector logic, variant conditions, font loading, and collage creation all coded from scratch.</p>
+    </div>
+    <div class="process-step reveal">
+      <span class="process-step-num">Step 04</span>
+      <h3 class="process-step-title">Ship to production</h3>
+      <p class="process-step-desc">The product is previewed, tested across variants, then pushed live — ready for customers to personalise and order in real time.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="section-header reveal">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Get in <em>touch</em></h2>
+  </div>
+  <div class="contact-inner reveal">
+    <p class="contact-text">Open to new roles. If you're looking for someone who can own a product pipeline from <em>design to deployment</em>, let's talk.</p>
+    <div class="contact-links">
+      <a href="mailto:your@email.com" class="contact-link">
+        jjwrightson00@email.com
+        <span class="contact-link-label">Email</span>
+      </a>
+      <a href="https://www.linkedin.com/in/jasmine-wrightson-81663322a/" class="contact-link" target="_blank" rel="noopener">
+        linkedin.com/in/jasmine-wrightson-81663322a/
+        <span class="contact-link-label">LinkedIn ↗</span>
+      </a>
+      <a href="your-cv.pdf" class="contact-link" download>
+        Download CV
+        <span class="contact-link-label">PDF</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span class="footer-copy">© 2026 Jasmine Wrightson</span>
+  <span class="footer-copy">Developer — UK</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
