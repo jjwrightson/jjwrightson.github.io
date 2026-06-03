@@ -1049,26 +1049,53 @@ collage.<span class="cf">addClipart</span>({
 });</pre></div>
     </div>
 
-    <div class="code-card reveal">
+   <div class="code-card reveal">
       <div class="code-card-header">
         <span class="code-card-title">Hourly file download process — Photobubble pipeline</span>
         <span class="code-card-lang">VB.NET</span>
       </div>
-      <div class="code-card-desc">Re-engineered the Photobubble file download process to run on an hourly schedule, replacing a manual process causing consistent delays to the 10:15 production report. Reports now run on time 99% of the time.</div>
-      <div class="code-block"><pre><span class="cc">' Hourly background download — runs on schedule</span>
-<span class="ck">Public Sub</span> <span class="cf">RunHourlyDownload</span>()
-  <span class="ck">Dim</span> pendingOrders <span class="ck">As</span> List(<span class="ck">Of</span> Order) = <span class="cf">GetPendingOrders</span>()
+      <div class="code-card-desc">Re-engineered the Photobubble file download process to run on an hourly schedule, replacing a manual process causing consistent delays to the 10:15 production report. Reports now run on time 99% of the time. <em>The snippets below are extracted from the full class to illustrate the key stages of the pipeline.</em></div>
+      <div class="code-block"><pre><span class="cc">' ── Snippet 1: Query pending orders from the database ──</span>
+sql = <span class="cs">"SELECT d.DetailID, de.OrderName,
+       if(reprint &gt; 0, d.coverfile, de.CoverFile) as 'CoverFile',
+       ifnull(bes.BES, 0) AS 'Bespoke', reprint
+       FROM (tblpoddetails d, tbl_pod_extdetails de, tblpodlibrary l)
+       LEFT JOIN (SELECT LibID, optionid, count(*) AS 'BES'
+           FROM tbl_pod_bespokeoptions WHERE OptionID in (2,6,7)
+           GROUP BY libid) bes ON bes.LibID = l.LibID
+       WHERE de.headid IN (SELECT headid FROM tblpodheader
+           WHERE podcustid = 835)
+       AND d.DatePrintSent IS NULL AND de.TextAcqDate IS NULL
+       AND (coversetup &lt;&gt; 2 OR textsetup &lt;&gt; 2)"</span>
 
-  <span class="ck">For Each</span> order <span class="ck">In</span> pendingOrders
-    <span class="ck">Try</span>
-      <span class="ck">Dim</span> filePath <span class="ck">As String</span> = <span class="cf">DownloadProjectFile</span>(order.Id)
-      <span class="cf">SendToImpogician</span>(filePath, order.ProductionQueue)
-      <span class="cf">MarkOrderProcessed</span>(order.Id)
-    <span class="ck">Catch</span> ex <span class="ck">As</span> Exception
-      <span class="cf">LogError</span>(order.Id, ex.Message)
-    <span class="ck">End Try</span>
-  <span class="ck">Next</span>
-<span class="ck">End Sub</span></pre></div>
+<span class="cc">' ── Snippet 2: Route file to correct location based on bespoke/reprint flags ──</span>
+<span class="ck">If</span> bespoke = <span class="num">1</span> <span class="ck">And</span> FileTypeID = <span class="num">1</span> <span class="ck">Then</span>
+  <span class="ck">If</span> reprint = <span class="ck">True Then</span>
+    Me.DownloadLocation = Network.<span class="cf">GetFilePath</span>(<span class="cs">"I:\Outgoing\835\" & FileName</span>)
+  <span class="ck">Else</span>
+    Me.DownloadLocation = WorkflowDir & <span class="cs">"TempStore\Photobubble\" & FileName</span>
+  <span class="ck">End If</span>
+<span class="ck">Else</span>
+  Me.DownloadLocation = Network.<span class="cf">GetFilePath</span>(<span class="cs">"I:\Outgoing\835\" & FileName</span>)
+<span class="ck">End If</span>
+
+<span class="cc">' ── Snippet 3: Build queue item and dispatch to Impogician ──</span>
+<span class="ck">If</span> bespoke = <span class="ck">True Then</span>
+  qi = <span class="ck">New</span> <span class="cf">QueueItem</span>(req.Identity, Shard.ShardName,
+       DetailID & <span class="cf">Left</span>(FileTypeID.ToString, <span class="num">1</span>) & <span class="cs">"DL"</span>,
+       <span class="cf">Format</span>(Batch, RefDateTime), URL, <span class="ck">True</span>, FileTypeID,
+       QueueItem.TransferMethod.PB_Split,
+       DownloadLocation, ClusterType.Debugging)
+<span class="ck">Else</span>
+  qi = <span class="ck">New</span> <span class="cf">QueueItem</span>(req.Identity, Shard.ShardName,
+       DetailID & <span class="cf">Left</span>(FileTypeID.ToString, <span class="num">1</span>) & <span class="cs">"DL"</span>,
+       <span class="cf">Format</span>(Batch, RefDateTime), URL, <span class="ck">True</span>, FileTypeID,
+       QueueItem.TransferMethod.PB,
+       DownloadLocation, ClusterType.Debugging)
+<span class="ck">End If</span>
+
+qi.<span class="cf">Export</span>(Shard.Endpoints.Realms(<span class="num">1</span>).RootDirectory,
+          Shard.Endpoints.MagicDir)</pre></div>
     </div>
 
     <div class="code-card reveal">
