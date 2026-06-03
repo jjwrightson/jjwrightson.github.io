@@ -44,46 +44,45 @@
     opacity: 0.5;
   }
 
+  /* ── HERO GALLERY ── */
+  .hero-gallery {
+    position: absolute;
+    right: 0;
+    top: 60px;
+    bottom: 100px;
+    width: 45%;
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  }
+
+  .gallery-track {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    animation: scrollUp 40s linear infinite;
+    padding: 12px 12px 12px 0;
+  }
+
+  .gallery-track:hover { animation-play-state: paused; }
+
+  .gallery-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border: 1px solid var(--warm-light);
+  }
+
+  @keyframes scrollUp {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+  }
+
+  @media (max-width: 900px) {
+    .hero-gallery { display: none; }
+  }
+
   /* ── HEADER / HERO ── */
- .hero-gallery {
-  position: absolute;
-  right: 0;
-  top: 60px;
-  bottom: 100px;
-  width: 45%;
-  overflow: hidden;
-  mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-}
-
-
-
-
-.gallery-track {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  animation: scrollUp 40s linear infinite;
-  padding: 12px 12px 12px 0;
-}
-
-.gallery-track:hover { animation-play-state: paused; }
-
-.gallery-img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border: 1px solid var(--warm-light);
-}
-
-@keyframes scrollUp {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-50%); }
-}
-
-@media (max-width: 900px) {
-  .hero-gallery { display: none; }
-}
   header {
     min-height: 100vh;
     display: grid;
@@ -110,10 +109,7 @@
     text-transform: uppercase;
   }
 
-  nav {
-    display: flex;
-    gap: 2.5rem;
-  }
+  nav { display: flex; gap: 2.5rem; }
 
   nav a {
     font-family: var(--mono);
@@ -157,10 +153,7 @@
     animation: fadeUp 0.9s ease forwards 0.35s;
   }
 
-  h1 em {
-    font-style: italic;
-    color: var(--rust);
-  }
+  h1 em { font-style: italic; color: var(--rust); }
 
   .hero-sub {
     margin-top: 2.5rem;
@@ -201,7 +194,6 @@
   }
 
   .btn:hover { background: var(--ink); color: var(--cream); }
-
   .btn-fill { background: var(--ink); color: var(--cream); }
   .btn-fill:hover { background: var(--rust); border-color: var(--rust); color: var(--white); }
 
@@ -233,11 +225,7 @@
     animation: grow 2s ease-in-out infinite;
   }
 
-  .stats-row {
-    display: flex;
-    gap: 3rem;
-  }
-
+  .stats-row { display: flex; gap: 3rem; }
   .stat-item { text-align: right; }
 
   .stat-num {
@@ -303,14 +291,9 @@
     margin-bottom: 1.25rem;
   }
 
-  .about-text p strong {
-    color: var(--ink);
-    font-weight: 400;
-  }
+  .about-text p strong { color: var(--ink); font-weight: 400; }
 
-  .skills-list {
-    list-style: none;
-  }
+  .skills-list { list-style: none; }
 
   .skills-list li {
     display: flex;
@@ -364,8 +347,6 @@
     padding-top: 0.35rem;
     transition: color 0.2s;
   }
-
-  .case-body {}
 
   .case-title-row {
     display: flex;
@@ -425,28 +406,9 @@
     color: var(--warm-light);
   }
 
-  /* Film strip image rows */
-  .case-imgs {
-    display: grid;
-    gap: 0.75rem;
-  }
-
+  .case-imgs { display: grid; gap: 0.75rem; }
   .case-imgs.strip-3 { grid-template-columns: repeat(3, 1fr); }
   .case-imgs.strip-4 { grid-template-columns: repeat(4, 1fr); }
-
-  .case-imgs.before-after {
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    max-width: 520px;
-  }
-
-  .before-after-arrow {
-    font-family: var(--mono);
-    font-size: 1.25rem;
-    color: var(--warm-light);
-    text-align: center;
-    padding: 0 0.5rem;
-  }
 
   .img-placeholder {
     aspect-ratio: 4 / 3;
@@ -456,14 +418,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.4rem;
-    font-family: var(--mono);
-    font-size: 0.55rem;
-    color: var(--warm-light);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    text-align: center;
-    line-height: 1.5;
     overflow: hidden;
     position: relative;
   }
@@ -485,13 +439,14 @@
     margin-top: 0.3rem;
     text-align: center;
   }
- /* ── DESIGN GRID ── */
+
+  /* ── DESIGN GRID ── */
   .design-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.75rem;
   }
- 
+
   .design-item {
     aspect-ratio: 4 / 3;
     overflow: hidden;
@@ -499,7 +454,7 @@
     background: var(--white);
     border: 1px solid var(--warm-light);
   }
- 
+
   .design-item img {
     width: 100%;
     height: 100%;
@@ -507,12 +462,8 @@
     display: block;
     transition: transform 0.4s ease;
   }
- 
+
   .design-item:hover img { transform: scale(1.03); }
- 
-  @media (max-width: 600px) {
-    .design-grid { grid-template-columns: repeat(2, 1fr); }
-  }
 
   /* ── PROCESS ── */
   .process-grid {
@@ -524,7 +475,6 @@
   .process-step {
     padding: 2.5rem 2rem 2.5rem 0;
     border-right: 1px solid var(--warm-light);
-    padding-right: 2rem;
   }
 
   .process-step:last-child { border-right: none; }
@@ -555,6 +505,75 @@
     line-height: 1.7;
   }
 
+  /* ── CODE SECTION ── */
+  .code-blocks { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .code-card {
+    border: 0.5px solid var(--warm-light);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .code-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    background: var(--white);
+    border-bottom: 0.5px solid var(--warm-light);
+  }
+
+  .code-card-title {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .code-card-lang {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    font-weight: 300;
+    color: var(--rust);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border: 0.5px solid var(--rust-light);
+    white-space: nowrap;
+  }
+
+  .code-card-desc {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--warm-mid);
+    line-height: 1.7;
+    border-bottom: 0.5px solid var(--warm-light);
+    background: var(--white);
+  }
+
+  .code-block {
+    background: var(--ink);
+    padding: 1.25rem;
+    overflow-x: auto;
+  }
+
+  .code-block pre {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    line-height: 1.8;
+    color: #c9baa8;
+    white-space: pre;
+    margin: 0;
+  }
+
+  .ck { color: #e07b54; }
+  .cs { color: #7ec896; }
+  .cc { color: #6b7a8d; font-style: italic; }
+  .cf { color: #79b8ff; }
+
   /* ── CONTACT ── */
   .contact-inner {
     display: grid;
@@ -571,7 +590,6 @@
   }
 
   .contact-text em { font-style: italic; color: var(--rust); }
-
   .contact-links { display: flex; flex-direction: column; gap: 1rem; }
 
   .contact-link {
@@ -632,10 +650,7 @@
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
 
-  .reveal.visible {
-    opacity: 1;
-    transform: none;
-  }
+  .reveal.visible { opacity: 1; transform: none; }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
@@ -659,26 +674,26 @@
     .case-top { grid-template-columns: 1fr; gap: 0.5rem; }
     .case-num { display: none; }
     .case-imgs.strip-3, .case-imgs.strip-4 { grid-template-columns: repeat(2, 1fr); }
-    .case-imgs.before-after { grid-template-columns: 1fr; max-width: 100%; }
-    .before-after-arrow { display: none; }
     h1 { font-size: 3.5rem; }
     .hero-footer { flex-direction: column; gap: 2rem; }
     .stats-row { flex-direction: column; gap: 1rem; }
     .stat-item { text-align: left; }
+    .design-grid { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
 </head>
 <body>
 
 <!-- ── HERO ── -->
-<header sstyle="position: relative">
+<header>
   <div class="header-top">
     <span class="logo">Jasmine.dev</span>
     <nav>
       <a href="#about">About</a>
       <a href="#work">Work</a>
-     <a href="#designs">Designs<?a>
+      <a href="#designs">Designs</a>
       <a href="#process">Process</a>
+      <a href="#code">Code</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
@@ -711,31 +726,30 @@
       </div>
     </div>
   </div>
- <div class="hero-gallery">
-  <div class="gallery-track">
-    <img class="gallery-img" src="images/design-2025-review.png" alt="">
-    <img class="gallery-img" src="images/design-love-checkerboard.png" alt="">
-    <img class="gallery-img" src="images/design-you-and-me.png" alt="">
-    <img class="gallery-img" src="images/design-birthday-teal.png" alt="">
-    <img class="gallery-img" src="images/design-tokyo.png" alt="">
-    <img class="gallery-img" src="images/design-seoul.png" alt="">
-    <img class="gallery-img" src="images/design-valentines-floral.png" alt="">
-    <img class="gallery-img" src="images/design-new-year.png" alt="">
-    <img class="gallery-img" src="images/design-birthday-purple.png" alt="">
-    <!-- Duplicate for seamless loop -->
-    <img class="gallery-img" src="images/design-2025-review.png" alt="">
-    <img class="gallery-img" src="images/design-love-checkerboard.png" alt="">
-    <img class="gallery-img" src="images/design-you-and-me.png" alt="">
-    <img class="gallery-img" src="images/design-birthday-teal.png" alt="">
-    <img class="gallery-img" src="images/design-tokyo.png" alt="">
-    <img class="gallery-img" src="images/design-seoul.png" alt="">
-    <img class="gallery-img" src="images/design-valentines-floral.png" alt="">
-    <img class="gallery-img" src="images/design-new-year.png" alt="">
-    <img class="gallery-img" src="images/design-birthday-purple.png" alt="">
-  </div>
-</div>
-</header>
 
+  <div class="hero-gallery">
+    <div class="gallery-track">
+      <img class="gallery-img" src="images/design-2025-review.png" alt="">
+      <img class="gallery-img" src="images/design-love-checkerboard.png" alt="">
+      <img class="gallery-img" src="images/design-you-and-me.png" alt="">
+      <img class="gallery-img" src="images/design-birthday-teal.png" alt="">
+      <img class="gallery-img" src="images/design-tokyo.png" alt="">
+      <img class="gallery-img" src="images/design-seoul.png" alt="">
+      <img class="gallery-img" src="images/design-valentines-floral.png" alt="">
+      <img class="gallery-img" src="images/design-new-year.png" alt="">
+      <img class="gallery-img" src="images/design-birthday-purple.png" alt="">
+      <img class="gallery-img" src="images/design-2025-review.png" alt="">
+      <img class="gallery-img" src="images/design-love-checkerboard.png" alt="">
+      <img class="gallery-img" src="images/design-you-and-me.png" alt="">
+      <img class="gallery-img" src="images/design-birthday-teal.png" alt="">
+      <img class="gallery-img" src="images/design-tokyo.png" alt="">
+      <img class="gallery-img" src="images/design-seoul.png" alt="">
+      <img class="gallery-img" src="images/design-valentines-floral.png" alt="">
+      <img class="gallery-img" src="images/design-new-year.png" alt="">
+      <img class="gallery-img" src="images/design-birthday-purple.png" alt="">
+    </div>
+  </div>
+</header>
 
 <!-- ── ABOUT ── -->
 <section id="about">
@@ -750,14 +764,14 @@
       <p>I'm now looking for a new role where that rare combination — design literacy plus technical execution at scale — is genuinely valued.</p>
     </div>
     <ul class="skills-list">
-<li>Mediaclip JS engine <span class="skill-tag">Specialisation</span></li>
-<li>Platform configuration <span class="skill-tag">Scripting & logic</span></li>
-<li>Adobe Photoshop <span class="skill-tag">Daily use</span></li>
-<li>Design translation <span class="skill-tag">PSD → live product</span></li>
-<li>Theme & variant logic <span class="skill-tag">Foil, colour, format</span></li>
-<li>Print-on-demand <span class="skill-tag">Industry</span></li>
-<li>E-commerce <span class="skill-tag">Domain</span></li>
-<li>HTML & CSS <span class="skill-tag">Frontend</span></li>
+      <li>Mediaclip JS engine <span class="skill-tag">Specialisation</span></li>
+      <li>Platform configuration <span class="skill-tag">Scripting &amp; logic</span></li>
+      <li>Adobe Photoshop <span class="skill-tag">Daily use</span></li>
+      <li>Design translation <span class="skill-tag">PSD → live product</span></li>
+      <li>Theme &amp; variant logic <span class="skill-tag">Foil, colour, format</span></li>
+      <li>Print-on-demand <span class="skill-tag">Industry</span></li>
+      <li>E-commerce <span class="skill-tag">Domain</span></li>
+      <li>HTML &amp; CSS <span class="skill-tag">Frontend</span></li>
     </ul>
   </div>
 </section>
@@ -780,24 +794,18 @@
             <h3 class="case-title">Foil Photobooks</h3>
             <span class="case-badge">Flagship launch</span>
           </div>
-          <p class="case-desc">Built an entirely new product category for the business from scratch — 
-designing and integrating a foil photobook experience including the designer configuration 
-and rendering pipeline, launching 41 designs across the range. Of those, 11 I personally 
-designed in Photoshop before building in code — the rest implemented from marketing-supplied 
-artwork. The range has generated approximately <strong>£24,400 in net sales</strong> (867 
-items, 585 orders). I continue to monitor all foil orders and proactively fix customer errors 
-to protect fulfilment quality — work well beyond a standard developer remit.</p>
-         <div class="pipeline">
-  <span class="pipe-step">New format scoped</span>
-  <span class="pipe-arrow">→</span>
-  <span class="pipe-step">Photoshop &amp; configuration</span>
-  <span class="pipe-arrow">→</span>
-  <span class="pipe-step">41 designs live</span>
-  <span class="pipe-arrow">→</span>
-  <span class="pipe-step">Rendering pipeline</span>
-  <span class="pipe-arrow">→</span>
-  <span class="pipe-step">Ongoing QA</span>
-</div>
+          <p class="case-desc">Built an entirely new product category for the business from scratch — designing and integrating a foil photobook experience including the designer configuration and rendering pipeline, launching 41 designs across the range. Of those, 11 I personally designed in Photoshop before building in code — the rest implemented from marketing-supplied artwork. The range has generated approximately <strong>£24,400 in net sales</strong> (867 items, 585 orders). I continue to monitor all foil orders and proactively fix customer errors to protect fulfilment quality — work well beyond a standard developer remit.</p>
+          <div class="pipeline">
+            <span class="pipe-step">New format scoped</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Photoshop &amp; configuration</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">41 designs live</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Rendering pipeline</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Ongoing QA</span>
+          </div>
         </div>
       </div>
       <div class="case-imgs strip-3">
@@ -872,20 +880,20 @@ to protect fulfilment quality — work well beyond a standard developer remit.</
             <h3 class="case-title">Weddings range</h3>
             <span class="case-badge">Strategic project</span>
           </div>
-          <p class="case-desc"><p class="case-desc">Currently leading the technical delivery of a new Weddings range projected to generate <strong>£80,000 per year</strong> in revenue — an ongoing project that cannot launch without my involvement. Dedicated 24+ hours in early 2026 to learning VDP (variable data printing) products in Mediaclip from scratch, a method entirely new to me. Worked directly with Mediaclip to resolve platform-level issues blocking the launch. The collection spans four stages of the wedding journey — Engagement, Wedding Day, Guests' Experience, and After-Wedding Memories — covering products such as save the date cards, wedding invitations, menu cards, place cards, seating charts, guest books, wedding photobooks, and personalised keepsakes. 23 designs across the first two product types already built, with a planned range of 27 distinct product types across the full collection.</p>
+          <p class="case-desc">Currently leading the technical delivery of a new Weddings range projected to generate <strong>£80,000 per year</strong> in revenue — an ongoing project that cannot launch without my involvement. Dedicated 24+ hours in early 2026 to learning VDP (variable data printing) products in Mediaclip from scratch, a method entirely new to me. Worked directly with Mediaclip to resolve platform-level issues blocking the launch. The collection spans four stages of the wedding journey — Engagement, Wedding Day, Guests' Experience, and After-Wedding Memories — covering products such as save the date cards, wedding invitations, menu cards, place cards, seating charts, guest books, wedding photobooks, and personalised keepsakes. 23 designs across the first two product types already built, with a planned range of 27 distinct product types across the full collection.</p>
           <div class="pipeline">
-  <span class="pipe-step">VDP method learned</span>
-  <span class="pipe-arrow">→</span>
-  <span class="pipe-step">Mediaclip liaison</span>
-  <span class="pipe-arrow">→</span>
-  <span class="pipe-step">Save the Date &amp; Invites built</span>
-  <span class="pipe-arrow">→</span>
-  <span class="pipe-step">23 designs ready to go live</span>
-  <span class="pipe-arrow">→</span>
-  <span class="pipe-step">Menu UI in progress</span>
-  <span class="pipe-arrow">→</span>
-  <span class="pipe-step">Full collection ongoing</span>
-</div>
+            <span class="pipe-step">VDP method learned</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Mediaclip liaison</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Save the Date &amp; Invites built</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">23 designs ready to go live</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Menu UI in progress</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Full collection ongoing</span>
+          </div>
         </div>
       </div>
       <div class="case-imgs strip-3">
@@ -913,31 +921,31 @@ to protect fulfilment quality — work well beyond a standard developer remit.</
             <h3 class="case-title">Coffee Table Photobooks</h3>
             <span class="case-badge">Scale &amp; revenue</span>
           </div>
-          <p class="case-desc"><p class="case-desc">Created 105 new coffee table photobook designs since March 2025, each configured end-to-end through the Mediaclip platform. Every clipart element used across these designs has been added to a shared library in the designer, making them available for customers to use across any other book — and where cliparts are solid colours, I've made them fully personalisable so customers can change the colours to suit their own style. Additionally, I've dedicated 21+ hours to implementing 50+ new background designs available to all customers across the designer. The range has generated approximately <strong>£19,230 in net sales</strong> (771 items, 530 orders) across the period — all delivered alongside other project work with no drop in output or quality.</p></p>
+          <p class="case-desc">Created 105 new coffee table photobook designs since March 2025, each configured end-to-end through the Mediaclip platform. Every clipart element used across these designs has been added to a shared library in the designer, making them available for customers to use across any other book — and where cliparts are solid colours, I've made them fully personalisable so customers can change the colours to suit their own style. Additionally, I've dedicated 21+ hours to implementing 50+ new background designs available to all customers across the designer. The range has generated approximately <strong>£19,230 in net sales</strong> (771 items, 530 orders) across the period — all delivered alongside other project work with no drop in output or quality.</p>
           <div class="pipeline">
-  <span class="pipe-step">PSD implemented</span>
-  <span class="pipe-arrow">→</span>
-  <span class="pipe-step">Clipart &amp; backgrounds library</span>
-  <span class="pipe-arrow">→</span>
-  <span class="pipe-step">Colour personalisation</span>
-  <span class="pipe-arrow">→</span>
-  <span class="pipe-step">105 designs live</span>
-  <span class="pipe-arrow">→</span>
-  <span class="pipe-step">£19,230 net sales</span>
-</div>
+            <span class="pipe-step">PSD implemented</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Clipart &amp; backgrounds library</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Colour personalisation</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">105 designs live</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">£19,230 net sales</span>
+          </div>
         </div>
       </div>
       <div class="case-imgs strip-3">
         <div>
-          <div class="img-placeholder"><img src="images/coffeetable-backgrounds.jpg" alt="Grid showing variety of coffee table photobook designs"></div>
+          <div class="img-placeholder"><img src="images/coffeetable-backgrounds.jpg" alt="Background library showing 50+ designs available"></div>
           <p class="img-caption">Background library — 50+ designs available</p>
         </div>
         <div>
-          <div class="img-placeholder"><img src="images/coffeetable-clipart.jpg" alt="Coffee table photobook PSD design file"></div>
+          <div class="img-placeholder"><img src="images/coffeetable-clipart.jpg" alt="Clipart library with colour personalisation"></div>
           <p class="img-caption">Clipart library with colour personalisation</p>
         </div>
         <div>
-          <div class="img-placeholder"><img src="images/coffeetable-live2.jpg" alt="Coffee table photobook live in Mediaclip designer"></div>
+          <div class="img-placeholder"><img src="images/coffeetable-live2.jpg" alt="Finished coffee table photobook product"></div>
           <p class="img-caption">Finished product</p>
         </div>
       </div>
@@ -945,42 +953,24 @@ to protect fulfilment quality — work well beyond a standard developer remit.</
 
   </div>
 </section>
- <section id="designs">
+
+<!-- ── DESIGNS ── -->
+<section id="designs">
   <div class="section-header reveal">
     <span class="section-num">02b</span>
     <h2 class="section-title">Selected <em>designs</em></h2>
   </div>
-  <p class="about-text" style="margin-bottom: 2.5rem;">
-    <p style="font-size: 1.05rem; font-weight: 300; color: var(--warm-mid); line-height: 1.8; max-width: 600px; margin-bottom: 2.5rem;">Alongside implementation work, I design a proportion of products personally — from initial concept in Photoshop through to the live configured product.</p>
-  </p>
+  <p style="font-size: 1.05rem; font-weight: 300; color: var(--warm-mid); line-height: 1.8; max-width: 600px; margin-bottom: 2.5rem;">Alongside implementation work, I design a proportion of products personally — from initial concept in Photoshop through to the live configured product.</p>
   <div class="design-grid reveal">
-    <div class="design-item">
-      <img src="images/design-2025-review.png" alt="2025 A Year in Review foil photobook design">
-    </div>
-    <div class="design-item">
-      <img src="images/design-love-checkerboard.png" alt="LOVE checkerboard foil photobook design">
-    </div>
-    <div class="design-item">
-      <img src="images/design-you-and-me.png" alt="You and Me Forever and Always foil photobook design">
-    </div>
-    <div class="design-item">
-      <img src="images/design-birthday-teal.png" alt="Happy Birthday teal foil photobook design">
-    </div>
-    <div class="design-item">
-      <img src="images/design-tokyo.png" alt="Tokyo Japan photobook design">
-    </div>
-    <div class="design-item">
-      <img src="images/design-seoul.png" alt="Seoul South Korea photobook design">
-    </div>
-    <div class="design-item">
-      <img src="images/design-valentines-floral.png" alt="Happy Valentine's Day black and gold floral foil photobook design">
-    </div>
-    <div class="design-item">
-      <img src="images/design-new-year.png" alt="Happy New Year black and gold fireworks foil photobook design">
-    </div>
-    <div class="design-item">
-      <img src="images/design-birthday-purple.png" alt="Happy Birthday purple and gold balloons foil photobook design">
-    </div>
+    <div class="design-item"><img src="images/design-2025-review.png" alt="2025 A Year in Review foil photobook design"></div>
+    <div class="design-item"><img src="images/design-love-checkerboard.png" alt="LOVE checkerboard foil photobook design"></div>
+    <div class="design-item"><img src="images/design-you-and-me.png" alt="You and Me Forever and Always foil photobook design"></div>
+    <div class="design-item"><img src="images/design-birthday-teal.png" alt="Happy Birthday teal foil photobook design"></div>
+    <div class="design-item"><img src="images/design-tokyo.png" alt="Tokyo Japan photobook design"></div>
+    <div class="design-item"><img src="images/design-seoul.png" alt="Seoul South Korea photobook design"></div>
+    <div class="design-item"><img src="images/design-valentines-floral.png" alt="Happy Valentines Day black and gold floral foil photobook design"></div>
+    <div class="design-item"><img src="images/design-new-year.png" alt="Happy New Year black and gold fireworks foil photobook design"></div>
+    <div class="design-item"><img src="images/design-birthday-purple.png" alt="Happy Birthday purple and gold balloons foil photobook design"></div>
   </div>
 </section>
 
@@ -1004,7 +994,7 @@ to protect fulfilment quality — work well beyond a standard developer remit.</
     <div class="process-step reveal">
       <span class="process-step-num">Step 03</span>
       <h3 class="process-step-title">Configure in JS</h3>
-      <p class="process-step-desc">The Mediaclip theme is built using platform-specific JavaScript — selector logic, variant conditions, font loading, and collage creation all written from scratch within Mediaclip's own engine</p>
+      <p class="process-step-desc">The Mediaclip theme is built using platform-specific JavaScript — selector logic, variant conditions, font loading, and collage creation all written from scratch within Mediaclip's own engine.</p>
     </div>
     <div class="process-step reveal">
       <span class="process-step-num">Step 04</span>
@@ -1014,21 +1004,125 @@ to protect fulfilment quality — work well beyond a standard developer remit.</
   </div>
 </section>
 
+<!-- ── CODE ── -->
+<section id="code">
+  <div class="section-header reveal">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Code <em>examples</em></h2>
+  </div>
+
+  <div class="code-blocks">
+
+   <div class="code-card reveal">
+      <div class="code-card-header">
+        <span class="code-card-title">Foil colour variant logic — Mediaclip theme</span>
+        <span class="code-card-lang">JavaScript</span>
+      </div>
+      <div class="code-card-desc">Each foil photobook supports 6 emboss colour options. This selector logic reads the customer's chosen option, maps it to the correct hex value, then applies it to the clipart element as a spot colour used in the foil render.</div>
+      <div class="code-block"><pre><span class="cc">// Read customer's chosen foil colour option</span>
+<span class="ck">const</span> foil = <span class="ck">this</span>.context.<span class="cf">getOption</span>(<span class="cs">"embossColour"</span>, <span class="cs">"gold"</span>);
+<span class="ck">let</span> embossColour;
+
+<span class="ck">if</span> (foil === <span class="cs">"gold"</span>) {
+  embossColour = <span class="cs">"#c08b4b"</span>;
+} <span class="ck">else if</span> (foil === <span class="cs">"silver"</span>) {
+  embossColour = <span class="cs">"#cacaca"</span>;
+} <span class="ck">else if</span> (foil === <span class="cs">"holographic"</span>) {
+  embossColour = <span class="cs">"#e2e2e2"</span>;
+} <span class="ck">else if</span> (foil === <span class="cs">"green"</span>) {
+  embossColour = <span class="cs">"#037225"</span>;
+} <span class="ck">else if</span> (foil === <span class="cs">"blue"</span>) {
+  embossColour = <span class="cs">"#2330e3"</span>;
+} <span class="ck">else if</span> (foil === <span class="cs">"red"</span>) {
+  embossColour = <span class="cs">"#f62e27"</span>;
+}
+
+<span class="cc">// Apply the emboss colour to the clipart as a foil spot colour</span>
+collage.<span class="cf">addClipart</span>({
+  id: <span class="cs">"$(package:printondemandworldwide/default)/assets/elements/clipart/shootingstar"</span>,
+  height: collage.width / <span class="num">1.5</span>,
+  width: collage.width / <span class="num">1.5</span>,
+  x: <span class="num">-320</span>,
+  y: <span class="num">-325</span>,
+  colorize: embossColour,
+  colorizeSpotColor: <span class="cs">'FoilStamp'</span>,
+});</pre></div>
+    </div>
+
+    <div class="code-card reveal">
+      <div class="code-card-header">
+        <span class="code-card-title">Hourly file download process — Photobubble pipeline</span>
+        <span class="code-card-lang">VB.NET</span>
+      </div>
+      <div class="code-card-desc">Re-engineered the Photobubble file download process to run on an hourly schedule, replacing a manual process causing consistent delays to the 10:15 production report. Reports now run on time 99% of the time.</div>
+      <div class="code-block"><pre><span class="cc">' Hourly background download — runs on schedule</span>
+<span class="ck">Public Sub</span> <span class="cf">RunHourlyDownload</span>()
+  <span class="ck">Dim</span> pendingOrders <span class="ck">As</span> List(<span class="ck">Of</span> Order) = <span class="cf">GetPendingOrders</span>()
+
+  <span class="ck">For Each</span> order <span class="ck">In</span> pendingOrders
+    <span class="ck">Try</span>
+      <span class="ck">Dim</span> filePath <span class="ck">As String</span> = <span class="cf">DownloadProjectFile</span>(order.Id)
+      <span class="cf">SendToImpogician</span>(filePath, order.ProductionQueue)
+      <span class="cf">MarkOrderProcessed</span>(order.Id)
+    <span class="ck">Catch</span> ex <span class="ck">As</span> Exception
+      <span class="cf">LogError</span>(order.Id, ex.Message)
+    <span class="ck">End Try</span>
+  <span class="ck">Next</span>
+<span class="ck">End Sub</span></pre></div>
+    </div>
+
+    <div class="code-card reveal">
+      <div class="code-card-header">
+        <span class="code-card-title">WooCommerce product banner — HTML &amp; CSS</span>
+        <span class="code-card-lang">HTML / CSS</span>
+      </div>
+      <div class="code-card-desc">Custom HTML and CSS used within WooCommerce product pages to surface promotional messaging and product information without relying on plugins.</div>
+      <div class="code-block"><pre><span class="cc">&lt;!-- Product badge banner --&gt;</span>
+&lt;<span class="ck">div</span> <span class="cf">class</span>=<span class="cs">"product-banner"</span>&gt;
+  &lt;<span class="ck">span</span> <span class="cf">class</span>=<span class="cs">"badge badge--foil"</span>&gt;Foil finish&lt;/<span class="ck">span</span>&gt;
+  &lt;<span class="ck">p</span> <span class="cf">class</span>=<span class="cs">"banner__text"</span>&gt;
+    Personalise your cover design below
+  &lt;/<span class="ck">p</span>&gt;
+&lt;/<span class="ck">div</span>&gt;
+
+<span class="cc">/* Banner styles */</span>
+.<span class="cf">product-banner</span> {
+  display: flex;
+  align-items: center;
+  gap: <span class="cs">0.75rem</span>;
+  padding: <span class="cs">0.75rem 1rem</span>;
+  background: <span class="cs">#f5f0e8</span>;
+  border-left: <span class="cs">3px</span> solid <span class="cs">#b84c2b</span>;
+}
+
+.<span class="cf">badge--foil</span> {
+  font-size: <span class="cs">0.7rem</span>;
+  text-transform: uppercase;
+  letter-spacing: <span class="cs">0.08em</span>;
+  padding: <span class="cs">0.2rem 0.6rem</span>;
+  background: <span class="cs">#b84c2b</span>;
+  color: <span class="cs">#fff</span>;
+}</pre></div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ── CONTACT ── -->
 <section id="contact">
   <div class="section-header reveal">
-    <span class="section-num">04</span>
+    <span class="section-num">05</span>
     <h2 class="section-title">Get in <em>touch</em></h2>
   </div>
   <div class="contact-inner reveal">
     <p class="contact-text">If you're looking for someone who can own a product pipeline from <em>design to deployment</em>, let's talk.</p>
     <div class="contact-links">
-      <a href="mailto:jjwrightson00@email.com" class="contact-link">
-        jjwrightson00@email.com
+      <a href="mailto:jjwrightson00@gmail.com" class="contact-link">
+        jjwrightson00@gmail.com
         <span class="contact-link-label">Email</span>
       </a>
       <a href="https://www.linkedin.com/in/jasmine-wrightson-81663322a/" class="contact-link" target="_blank" rel="noopener">
-        linkedin.com/in/jasmine-wrightson-81663322a/
+        linkedin.com/in/jasmine-wrightson
         <span class="contact-link-label">LinkedIn ↗</span>
       </a>
       <a href="Jasmine_Wrightson-CV.pdf" class="contact-link" download>
@@ -1047,11 +1141,9 @@ to protect fulfilment quality — work well beyond a standard developer remit.</
 
 <script>
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, 80);
+        setTimeout(() => { entry.target.classList.add('visible'); }, 80);
         observer.unobserve(entry.target);
       }
     });
