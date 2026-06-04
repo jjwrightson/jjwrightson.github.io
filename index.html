@@ -1116,7 +1116,8 @@ qi.<span class="cf">Export</span>(Shard.Endpoints.Realms(<span class="num">1</sp
         <span class="code-card-title">Shop the Collection block — WooCommerce</span>
         <span class="code-card-lang">PHP / CSS</span>
       </div>
-<div class="code-card-desc">A custom WooCommerce hook that reads the current product's tags, identifies which collection it belongs to, and dynamically renders a "Shop the Collection" grid of related products beneath the product summary. Used across the site to surface cross-sell products without any plugin dependency. Background colours and collection styling are defined in collaboration with the marketing team.</div>      <div class="code-block"><pre><span class="cc">// Hook into WooCommerce after product summary</span>
+      <div class="code-card-desc">A custom WooCommerce hook that reads the current product's tags, identifies which collection it belongs to, and dynamically renders a "Shop the Collection" grid of related products beneath the product summary. Used across the site to surface cross-sell products without any plugin dependency. Background colours and collection styling are defined in collaboration with the marketing team.</div>
+      <div class="code-block"><pre><span class="cc">// Hook into WooCommerce after product summary</span>
 <span class="cf">add_action</span>(<span class="cs">'woocommerce_after_single_product_summary'</span>,
            <span class="cs">'add_shop_collection_block'</span>, <span class="num">5</span>);
 
@@ -1170,10 +1171,10 @@ qi.<span class="cf">Export</span>(Shard.Endpoints.Realms(<span class="num">1</sp
   height: <span class="num">100%</span>;
   object-fit: cover;
 }</pre></div>
-    </div>
       <div style="border-top: 0.5px solid var(--warm-light); padding: 0.75rem 1.25rem; background: var(--white);">
         <img src="images/woocommerce-collection-live.jpg" alt="Shop the Collection block live on photobubble.co.uk" style="width: 100%; display: block; border: 1px solid var(--warm-light);">
         <p style="font-family: var(--mono); font-size: 0.55rem; color: var(--warm-mid); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 0.5rem;">Live result — photobubble.co.uk</p>
+      </div>
     </div>
 
   </div>
