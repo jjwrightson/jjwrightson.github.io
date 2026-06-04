@@ -1113,36 +1113,67 @@ qi.<span class="cf">Export</span>(Shard.Endpoints.Realms(<span class="num">1</sp
 
     <div class="code-card reveal">
       <div class="code-card-header">
-        <span class="code-card-title">WooCommerce product banner — HTML &amp; CSS</span>
-        <span class="code-card-lang">HTML / CSS</span>
+        <span class="code-card-title">Shop the Collection block — WooCommerce</span>
+        <span class="code-card-lang">PHP / CSS</span>
       </div>
-      <div class="code-card-desc">Custom HTML and CSS used within WooCommerce product pages to surface promotional messaging and product information without relying on plugins.</div>
-      <div class="code-block"><pre><span class="cc">&lt;!-- Product badge banner --&gt;</span>
-&lt;<span class="ck">div</span> <span class="cf">class</span>=<span class="cs">"product-banner"</span>&gt;
-  &lt;<span class="ck">span</span> <span class="cf">class</span>=<span class="cs">"badge badge--foil"</span>&gt;Foil finish&lt;/<span class="ck">span</span>&gt;
-  &lt;<span class="ck">p</span> <span class="cf">class</span>=<span class="cs">"banner__text"</span>&gt;
-    Personalise your cover design below
-  &lt;/<span class="ck">p</span>&gt;
-&lt;/<span class="ck">div</span>&gt;
+<div class="code-card-desc">A custom WooCommerce hook that reads the current product's tags, identifies which collection it belongs to, and dynamically renders a "Shop the Collection" grid of related products beneath the product summary. Used across the site to surface cross-sell products without any plugin dependency. Background colours and collection styling are defined in collaboration with the marketing team.</div>      <div class="code-block"><pre><span class="cc">// Hook into WooCommerce after product summary</span>
+<span class="cf">add_action</span>(<span class="cs">'woocommerce_after_single_product_summary'</span>,
+           <span class="cs">'add_shop_collection_block'</span>, <span class="num">5</span>);
 
-<span class="cc">/* Banner styles */</span>
-.<span class="cf">product-banner</span> {
-  display: flex;
-  align-items: center;
-  gap: <span class="cs">0.75rem</span>;
-  padding: <span class="cs">0.75rem 1rem</span>;
-  background: <span class="cs">#f5f0e8</span>;
-  border-left: <span class="cs">3px</span> solid <span class="cs">#b84c2b</span>;
+<span class="ck">function</span> <span class="cf">add_shop_collection_block</span>() {
+  <span class="ck">if</span> (!<span class="cf">is_product</span>()) <span class="ck">return</span>;
+  <span class="ck">global</span> $product;
+
+  <span class="cc">// Get product tags and find matching collection</span>
+  $terms = <span class="cf">wp_get_post_terms</span>($product-><span class="cf">get_id</span>(), <span class="cs">'product_tag'</span>);
+  <span class="ck">if</span> (<span class="cf">empty</span>($terms)) <span class="ck">return</span>;
+
+  $collection = <span class="ck">null</span>;
+  <span class="ck">foreach</span> ($terms <span class="ck">as</span> $term) {
+    <span class="ck">if</span> (<span class="cf">strpos</span>($term->slug, <span class="cs">'wedding-collection'</span>) !== <span class="ck">false</span>) {
+      $collection = $term->slug;
+      <span class="ck">break</span>;
+    }
+  }
+  <span class="ck">if</span> (!$collection) <span class="ck">return</span>;
+
+  <span class="cc">// Format collection name for display</span>
+  $nice_name = <span class="cf">ucwords</span>(<span class="cf">str_replace</span>(<span class="cs">'-'</span>, <span class="cs">' '</span>,
+    <span class="cf">str_replace</span>(<span class="cs">'wedding-collection'</span>, <span class="cs">''</span>, $collection)));
+
+  <span class="cc">// Render collection grid via shortcode</span>
+  <span class="ck">echo</span> <span class="cs">'&lt;div class="shop-collection"&gt;'</span>;
+  <span class="ck">echo</span> <span class="cs">'&lt;h2&gt;Shop the '</span> . $nice_name . <span class="cs">' Collection&lt;/h2&gt;'</span>;
+  <span class="ck">echo</span> <span class="cf">do_shortcode</span>(
+    <span class="cs">'[products limit="8" columns="5" tag="'</span> . $collection .
+    <span class="cs">'" visibility="any" exclude="'</span> . $product-><span class="cf">get_id</span>() . <span class="cs">'"]'</span>
+  );
+  <span class="ck">echo</span> <span class="cs">'&lt;/div&gt;'</span>;
 }
 
-.<span class="cf">badge--foil</span> {
-  font-size: <span class="cs">0.7rem</span>;
-  text-transform: uppercase;
-  letter-spacing: <span class="cs">0.08em</span>;
-  padding: <span class="cs">0.2rem 0.6rem</span>;
-  background: <span class="cs">#b84c2b</span>;
-  color: <span class="cs">#fff</span>;
+<span class="cc">/* Collection container */</span>
+.<span class="cf">shop-collection</span> {
+  max-width: <span class="num">1000px</span>;
+  margin: <span class="num">-50px</span> auto <span class="num">40px</span>;
+  padding: <span class="num">20px</span>;
+  background-color: <span class="cs">#ebebec</span>;
+  border-radius: <span class="num">6px</span>;
+}
+
+<span class="cc">/* Square product images */</span>
+.<span class="cf">shop-collection</span> .product-small .box-image {
+  aspect-ratio: <span class="num">1</span> / <span class="num">1</span>;
+  overflow: hidden;
+}
+.<span class="cf">shop-collection</span> .product-small .box-image img {
+  width: <span class="num">100%</span>;
+  height: <span class="num">100%</span>;
+  object-fit: cover;
 }</pre></div>
+      <div style="border-top: 0.5px solid var(--warm-light); padding: 0.75rem 1.25rem; background: var(--white);">
+        <img src="images/woocommerce-collection-live.jpg" alt="Shop the Collection block live on photobubble.co.uk" style="width: 100%; display: block; border: 1px solid var(--warm-light);">
+        <p style="font-family: var(--mono); font-size: 0.55rem; color: var(--warm-mid); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 0.5rem;">Live result — photobubble.co.uk</p>
+      </div>
     </div>
 
   </div>
