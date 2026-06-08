@@ -239,21 +239,21 @@
 
   .proof-panel span { color: var(--muted); }
 
-  .metrics {
+ .metrics {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  border-bottom: 1px solid var(--line);
-  background: #DDE5DE; /* new soft green base */
+  background: ##ECE8DE; 
+  border-top: 1px solid #d9d0c2;
+  border-bottom: 1px solid #d9d0c2;
 }
 
 .metric {
   min-height: 150px;
   padding: clamp(1rem, 2.4vw, 2rem);
-  border-right: 1px solid rgba(49, 95, 82, 0.15);
+  border-right: 1px solid #d9d0c2;
   display: grid;
   align-content: center;
   gap: 0.35rem;
-  background: transparent; /* remove block feel */
 }
 
 .metric:last-child {
@@ -265,12 +265,12 @@
   font-size: clamp(2.4rem, 5vw, 4rem);
   font-weight: 500;
   line-height: 0.95;
-  color: #315f52; /* your green */
+  color: #315f52;
   letter-spacing: -0.5px;
 }
 
 .metric .meta-label {
-  color: rgba(49, 95, 82, 0.7);
+  color: #69645c;
 }
 
   .meta-label {
