@@ -3,727 +3,736 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jasmine Wrightson — Developer</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<meta name="description" content="Jasmine Wrightson, developer and design-to-code specialist building personalised print-on-demand products from Photoshop concepts to live ecommerce experiences.">
+<title>Jasmine Wrightson - Developer</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *, *::before, *::after { box-sizing: border-box; }
+  * { margin: 0; }
 
   :root {
-    --cream: #EDEDE3;
-    --ink: #1A1714;
-    --rust: #6B8A7A;
-    --rust-light: #C7D2C2;
-    --warm-mid: #6F7C70;
-    --warm-light: #D6DDD4;
-    --white: #FDFAF5;
-    --serif: 'Cormorant Garamond', Georgia, serif;
-    --mono: 'DM Mono', monospace;
+    --paper: #f7f3ea;
+    --paper-strong: #fffaf0;
+    --ink: #171512;
+    --muted: #69645c;
+    --line: #d9d0c2;
+    --green: #315f52;
+    --blue: #264a6f;
+    --red: #923d36;
+    --gold: #b48237;
+    --shadow: 0 20px 60px rgba(23, 21, 18, 0.12);
+    --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --serif: Georgia, "Times New Roman", serif;
+    --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   }
 
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    background: var(--paper);
+  }
 
   body {
-    background: var(--cream);
+    min-width: 320px;
     color: var(--ink);
-    font-family: var(--serif);
-    font-size: 18px;
-    line-height: 1.6;
+    background:
+      linear-gradient(90deg, rgba(23, 21, 18, 0.035) 1px, transparent 1px) 0 0 / 84px 84px,
+      linear-gradient(180deg, rgba(23, 21, 18, 0.025) 1px, transparent 1px) 0 0 / 84px 84px,
+      var(--paper);
+    font-family: var(--sans);
+    line-height: 1.55;
     overflow-x: hidden;
   }
 
-  /* ── NOISE TEXTURE OVERLAY ── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1000;
-    opacity: 0.5;
-  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  strong { font-weight: 700; color: var(--ink); }
 
-  /* ── HERO GALLERY ── */
-  .hero-gallery {
-    position: absolute;
-    right: 0;
-    top: 60px;
-    bottom: 100px;
-    width: 45%;
-    overflow: hidden;
-    mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-  }
-
-  .gallery-track {
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    animation: scrollUp 40s linear infinite;
-    padding: 12px 12px 12px 0;
-  }
-
-  .gallery-track:hover { animation-play-state: paused; }
-
-  .gallery-img {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    border: 1px solid var(--warm-light);
-  }
-
-  @keyframes scrollUp {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-50%); }
-  }
-
-  @media (max-width: 900px) {
-    .hero-gallery { display: none; }
-  }
-
-  /* ── HEADER / HERO ── */
-  header {
-    min-height: 100vh;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    padding: 2.5rem 4rem;
-    position: relative;
-    border-bottom: 1px solid var(--warm-light);
-  }
-
-  .header-top {
-    display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: flex-start;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.1s;
+    gap: 1rem;
+    padding: 0.85rem clamp(1rem, 4vw, 3rem);
+    border-bottom: 1px solid rgba(23, 21, 18, 0.12);
+    background: rgba(247, 243, 234, 0.88);
+    backdrop-filter: blur(16px);
   }
 
-  .logo {
+  .brand {
     font-family: var(--mono);
-    font-size: 0.75rem;
-    font-weight: 300;
-    color: var(--warm-mid);
-    letter-spacing: 0.05em;
+    font-size: 0.74rem;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--green);
+    text-decoration: none;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.9rem, 2vw, 1.65rem);
+    font-family: var(--mono);
+    font-size: 0.72rem;
     text-transform: uppercase;
   }
-
-  nav { display: flex; gap: 2.5rem; }
 
   nav a {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    font-weight: 300;
-    color: var(--warm-mid);
+    color: var(--muted);
     text-decoration: none;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    transition: color 0.2s;
   }
 
-  nav a:hover { color: var(--ink); }
+  nav a:hover,
+  nav a:focus-visible { color: var(--ink); }
 
-  .hero-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 4rem 0 2rem;
+  .hero {
+    min-height: calc(100svh - 58px);
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(360px, 0.9fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+    padding: clamp(2rem, 5vw, 5rem) clamp(1rem, 4vw, 3rem) 4rem;
+    border-bottom: 1px solid var(--line);
   }
 
-  .hero-eyebrow {
+  .eyebrow,
+  .kicker,
+  .meta-label,
+  .tag,
+  .section-number,
+  .case-index,
+  .caption,
+  .button,
+  .code-label,
+  .footer-copy {
     font-family: var(--mono);
-    font-size: 0.7rem;
-    font-weight: 300;
-    color: var(--rust);
-    letter-spacing: 0.12em;
+    letter-spacing: 0;
     text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.25s;
+  }
+
+  .eyebrow {
+    width: fit-content;
+    margin-bottom: 1.25rem;
+    padding: 0.28rem 0.55rem;
+    border: 1px solid rgba(49, 95, 82, 0.25);
+    color: var(--green);
+    background: rgba(255, 250, 240, 0.5);
+    font-size: 0.72rem;
   }
 
   h1 {
-    font-size: clamp(4rem, 10vw, 9rem);
-    font-weight: 300;
-    line-height: 0.9;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    opacity: 0;
-    animation: fadeUp 0.9s ease forwards 0.35s;
+    max-width: 11ch;
+    font-family: var(--serif);
+    font-size: clamp(4.5rem, 11vw, 10.5rem);
+    font-weight: 400;
+    line-height: 0.86;
   }
 
-  h1 em { font-style: italic; color: var(--rust); }
+  h1 span {
+    display: block;
+    font-style: italic;
+    color: var(--red);
+  }
 
-  .hero-sub {
-    margin-top: 2.5rem;
-    max-width: 520px;
-    font-size: 1.15rem;
-    font-weight: 300;
-    color: var(--warm-mid);
-    line-height: 1.7;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.5s;
+  .hero-copy {
+    max-width: 650px;
+    margin-top: 1.6rem;
+    color: var(--muted);
+    font-size: clamp(1rem, 1.6vw, 1.25rem);
+  }
+
+  .role-fit {
+    max-width: 650px;
+    margin-top: 1rem;
+    padding-left: 1rem;
+    border-left: 3px solid var(--green);
+    color: var(--ink);
+    font-size: 0.96rem;
   }
 
   .hero-actions {
     display: flex;
-    gap: 1.25rem;
-    margin-top: 2.5rem;
     flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.65s;
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.75rem;
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: 1px solid var(--ink);
-    color: var(--ink);
-    background: transparent;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
-  }
-
-  .btn:hover { background: var(--ink); color: var(--cream); }
-  .btn-fill { background: var(--ink); color: var(--cream); }
-  .btn-fill:hover { background: var(--rust); border-color: var(--rust); color: var(--white); }
-
-  .hero-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.75s;
-  }
-
-  .scroll-hint {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    font-weight: 300;
-    color: var(--warm-mid);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
     gap: 0.75rem;
+    margin-top: 2rem;
   }
 
-  .scroll-line {
-    width: 40px;
-    height: 1px;
-    background: var(--warm-light);
-    display: inline-block;
-    animation: grow 2s ease-in-out infinite;
-  }
-
-  .stats-row { display: flex; gap: 3rem; }
-  .stat-item { text-align: right; }
-
-  .stat-num {
-    display: block;
-    font-size: 2.5rem;
-    font-weight: 300;
-    line-height: 1;
-    color: var(--ink);
-  }
-
-  .stat-label {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    font-weight: 300;
-    color: var(--warm-mid);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  /* ── SECTION SHARED ── */
-  section {
-    padding: 6rem 4rem;
-    border-bottom: 1px solid var(--warm-light);
-  }
-
-  .section-header {
-    display: flex;
-    align-items: baseline;
-    gap: 1.5rem;
-    margin-bottom: 4rem;
-  }
-
-  .section-num {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    font-weight: 300;
-    color: var(--rust);
-    letter-spacing: 0.1em;
-  }
-
-  .section-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 300;
-    line-height: 1;
-    color: var(--ink);
-  }
-
-  .section-title em { font-style: italic; color: var(--rust); }
-
-  /* ── ABOUT ── */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: start;
-  }
-
-  .about-text p {
-    font-size: 1.15rem;
-    font-weight: 300;
-    color: var(--warm-mid);
-    line-height: 1.8;
-    margin-bottom: 1.25rem;
-  }
-
-  .about-text p strong { color: var(--ink); font-weight: 400; }
-
-  .skills-list { list-style: none; }
-
-  .skills-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--warm-light);
-    font-size: 1rem;
-    font-weight: 300;
-    color: var(--ink);
-  }
-
-  .skills-list li:first-child { border-top: 1px solid var(--warm-light); }
-
-  .skill-tag {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    font-weight: 300;
-    color: var(--warm-mid);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  /* ── CASE STUDIES ── */
-  .cases { display: flex; flex-direction: column; gap: 0; }
-
-  .case {
-    padding: 2.5rem 0;
-    border-bottom: 1px solid var(--warm-light);
-    cursor: default;
-  }
-
-  .case:first-child { border-top: 1px solid var(--warm-light); }
-
-  .case-top {
-    display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 2.5rem;
-    align-items: start;
-    margin-bottom: 1.75rem;
-  }
-
-  .case:hover .case-num { color: var(--rust); }
-
-  .case-num {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    font-weight: 300;
-    color: var(--warm-light);
-    letter-spacing: 0.08em;
-    padding-top: 0.35rem;
-    transition: color 0.2s;
-  }
-
-  .case-title-row {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    margin-bottom: 0.75rem;
-    flex-wrap: wrap;
-  }
-
-  .case-title {
-    font-size: 1.5rem;
-    font-weight: 300;
-    color: var(--ink);
-  }
-
-  .case-badge {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    font-weight: 300;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.25rem 0.75rem;
-    border: 1px solid var(--rust-light);
-    color: var(--rust);
-  }
-
-  .case-desc {
-    font-size: 1rem;
-    font-weight: 300;
-    color: var(--warm-mid);
-    line-height: 1.7;
-    margin-bottom: 1.25rem;
-  }
-
-  .pipeline {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-  }
-
-  .pipe-step {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 0.3rem 0.75rem;
-    background: var(--white);
-    border: 1px solid var(--warm-light);
-    color: var(--warm-mid);
-  }
-
-  .pipe-arrow {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--warm-light);
-  }
-
-  .case-imgs { display: grid; gap: 0.75rem; }
-  .case-imgs.strip-3 { grid-template-columns: repeat(3, 1fr); }
-  .case-imgs.strip-4 { grid-template-columns: repeat(4, 1fr); }
-
-  .img-placeholder {
-    aspect-ratio: 4 / 3;
-    background: var(--white);
-    border: 1px solid var(--warm-light);
-    display: flex;
-    flex-direction: column;
+  .button {
+    display: inline-flex;
+    min-height: 44px;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    position: relative;
+    border: 1px solid var(--ink);
+    padding: 0.78rem 1rem;
+    background: transparent;
+    color: var(--ink);
+    font-size: 0.72rem;
+    text-decoration: none;
+    transition: transform 180ms ease, background 180ms ease, color 180ms ease, border-color 180ms ease;
   }
 
-  .img-placeholder img {
-    position: absolute;
-    inset: 0;
+  .button:hover,
+  .button:focus-visible {
+    transform: translateY(-2px);
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .button.primary {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .button.primary:hover,
+  .button.primary:focus-visible {
+    background: var(--green);
+    border-color: var(--green);
+  }
+
+  .hero-board {
+    display: grid;
+    grid-template-columns: 1fr 0.72fr;
+    grid-template-rows: auto auto;
+    gap: 0.85rem;
+    align-items: stretch;
+  }
+
+  .feature-image,
+  .stack-image,
+  .proof-panel {
+    border: 1px solid rgba(23, 21, 18, 0.14);
+    background: var(--paper-strong);
+    box-shadow: var(--shadow);
+  }
+
+  .feature-image {
+    grid-row: span 2;
+    min-height: 610px;
+    overflow: hidden;
+  }
+
+  .feature-image img,
+  .stack-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  .img-caption {
-    font-family: var(--mono);
-    font-size: 0.55rem;
-    color: var(--warm-mid);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-top: 0.3rem;
-    text-align: center;
+  .stack-image {
+    min-height: 295px;
+    overflow: hidden;
   }
 
-  /* ── DESIGN GRID ── */
-  .design-grid {
+  .proof-panel {
+    padding: 1.1rem;
+    display: grid;
+    align-content: end;
+    gap: 1rem;
+  }
+
+  .proof-panel p {
+    font-family: var(--serif);
+    font-size: clamp(1.65rem, 3vw, 2.5rem);
+    line-height: 1;
+  }
+
+  .proof-panel span { color: var(--muted); }
+
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .metric {
+    min-height: 150px;
+    padding: clamp(1rem, 2.4vw, 2rem);
+    border-right: 1px solid var(--line);
+    display: grid;
+    align-content: center;
+    gap: 0.35rem;
+    background: rgba(255, 250, 240, 0.38);
+  }
+
+  .metric:last-child { border-right: 0; }
+
+  .metric strong {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 400;
+    line-height: 0.95;
+  }
+
+  .meta-label {
+    color: var(--muted);
+    font-size: 0.72rem;
+  }
+
+  section {
+    padding: clamp(3.5rem, 8vw, 7.5rem) clamp(1rem, 4vw, 3rem);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .section-heading {
+    display: grid;
+    grid-template-columns: 5rem minmax(0, 1fr);
+    gap: clamp(1rem, 3vw, 2rem);
+    align-items: start;
+    margin-bottom: clamp(2rem, 5vw, 4.5rem);
+  }
+
+  .section-number {
+    color: var(--green);
+    font-size: 0.72rem;
+    padding-top: 0.55rem;
+  }
+
+  h2 {
+    max-width: 920px;
+    font-family: var(--serif);
+    font-size: clamp(2.55rem, 6.1vw, 5.9rem);
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  h2 em { color: var(--blue); font-style: italic; }
+
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(320px, 0.7fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: start;
+  }
+
+  .body-copy {
+    max-width: 850px;
+    display: grid;
+    gap: 1.15rem;
+    color: var(--muted);
+    font-size: clamp(1rem, 1.45vw, 1.17rem);
+  }
+
+  .skills {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .skill-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.2rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(23, 21, 18, 0.14);
+  }
+
+  .tag {
+    width: fit-content;
+    align-self: start;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid rgba(146, 61, 54, 0.25);
+    color: var(--red);
+    font-size: 0.66rem;
+    white-space: nowrap;
+  }
+
+  .case-list {
+    display: grid;
+    gap: clamp(2rem, 4vw, 4rem);
+  }
+
+  .case {
+    display: grid;
+    grid-template-columns: 5rem minmax(0, 1fr);
+    gap: clamp(1rem, 3vw, 2rem);
+  }
+
+  .case-index {
+    color: var(--green);
+    font-size: 0.72rem;
+    padding-top: 0.4rem;
+  }
+
+  .case-content {
+    display: grid;
+    gap: 1.4rem;
+  }
+
+  .case-title-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.8rem;
+  }
+
+  h3 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 4rem);
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  .case-copy {
+    max-width: 1050px;
+    color: var(--muted);
+    font-size: 1rem;
+  }
+
+  .flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .flow span {
+    border: 1px solid rgba(23, 21, 18, 0.13);
+    background: rgba(255, 250, 240, 0.58);
+    padding: 0.32rem 0.55rem;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+  }
+
+  .image-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.75rem;
   }
 
-  .design-item {
-    aspect-ratio: 4 / 3;
-    overflow: hidden;
-    position: relative;
-    background: var(--white);
-    border: 1px solid var(--warm-light);
+  .image-grid.four { grid-template-columns: repeat(4, 1fr); }
+
+  figure {
+    display: grid;
+    gap: 0.42rem;
   }
 
-  .design-item img {
+  figure img {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
-    display: block;
-    transition: transform 0.4s ease;
+    border: 1px solid rgba(23, 21, 18, 0.14);
+    background: var(--paper-strong);
   }
 
-  .design-item:hover img { transform: scale(1.03); }
+  .caption {
+    color: var(--muted);
+    font-size: 0.65rem;
+  }
 
-  /* ── PROCESS ── */
+  .design-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .design-grid figure {
+    padding: 0.45rem;
+    border: 1px solid rgba(23, 21, 18, 0.14);
+    background: rgba(255, 250, 240, 0.5);
+    transition: transform 220ms ease, box-shadow 220ms ease;
+  }
+
+  .design-grid img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border: 1px solid rgba(23, 21, 18, 0.1);
+    background: var(--paper-strong);
+  }
+
+  .design-grid figure:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+  }
+
   .process-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 0;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
   }
 
   .process-step {
-    padding: 2.5rem 2rem 2.5rem 0;
-    border-right: 1px solid var(--warm-light);
+    min-height: 300px;
+    padding: clamp(1rem, 2.4vw, 2rem);
+    display: grid;
+    align-content: space-between;
+    gap: 1rem;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: rgba(255, 250, 240, 0.36);
   }
 
-  .process-step:last-child { border-right: none; }
-  .process-step:not(:first-child) { padding-left: 2rem; }
+  .process-step p { color: var(--muted); }
 
-  .process-step-num {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    font-weight: 300;
-    color: var(--rust);
-    letter-spacing: 0.1em;
-    margin-bottom: 1.5rem;
-    display: block;
+  .step-title {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 3vw, 2.5rem);
+    line-height: 1;
   }
 
-  .process-step-title {
-    font-size: 1.25rem;
-    font-weight: 300;
-    color: var(--ink);
-    margin-bottom: 0.75rem;
-    line-height: 1.2;
+  .code-layout {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.38fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: start;
+    min-width: 0;
   }
 
-  .process-step-desc {
-    font-size: 0.9rem;
-    font-weight: 300;
-    color: var(--warm-mid);
-    line-height: 1.7;
+  .code-menu {
+    position: sticky;
+    top: 5rem;
+    display: grid;
+    gap: 0.75rem;
+    min-width: 0;
   }
 
-  /* ── CODE SECTION ── */
-  .code-blocks { display: flex; flex-direction: column; gap: 1.5rem; }
-
-  .code-card {
-    border: 0.5px solid var(--warm-light);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .code-card-header {
+  .code-menu a {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 0.75rem 1.25rem;
-    background: var(--white);
-    border-bottom: 0.5px solid var(--warm-light);
+    gap: 1rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(23, 21, 18, 0.16);
+    text-decoration: none;
   }
 
-  .code-card-title {
-    font-family: var(--mono);
-    font-size: 0.7rem;
+  .code-menu a:hover { color: var(--green); }
+
+  .code-label {
+    color: var(--muted);
+    font-size: 0.68rem;
+  }
+
+  .code-stack {
+    display: grid;
+    gap: 1.2rem;
+    min-width: 0;
+  }
+
+  .code-context {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .context-card {
+    min-height: 150px;
+    display: grid;
+    align-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    background: rgba(255, 250, 240, 0.48);
+  }
+
+  .context-card strong {
+    font-family: var(--serif);
+    font-size: clamp(1.65rem, 3vw, 2.4rem);
     font-weight: 400;
-    color: var(--ink);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .code-card-lang {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    font-weight: 300;
-    color: var(--rust);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.2rem 0.6rem;
-    border: 0.5px solid var(--rust-light);
-    white-space: nowrap;
-  }
-
-  .code-card-desc {
-    padding: 0.75rem 1.25rem;
-    font-size: 0.9rem;
-    font-weight: 300;
-    color: var(--warm-mid);
-    line-height: 1.7;
-    border-bottom: 0.5px solid var(--warm-light);
-    background: var(--white);
+    line-height: 1;
   }
 
   .code-block {
-    background: var(--ink);
-    padding: 1.25rem;
+    border: 1px solid rgba(23, 21, 18, 0.16);
+    background: #181614;
+    color: #eadfce;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .code-block header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid rgba(247, 243, 234, 0.16);
+    background: #221f1b;
+  }
+
+  .code-block p {
+    padding: 0.9rem 1rem 0;
+    color: #c4b7a3;
+    font-size: 0.92rem;
+  }
+
+  pre {
+    max-width: 100%;
     overflow-x: auto;
-  }
-
-  .code-block pre {
+    padding: 1rem;
     font-family: var(--mono);
-    font-size: 0.7rem;
-    line-height: 1.8;
-    color: #c9baa8;
-    white-space: pre;
-    margin: 0;
+    font-size: 0.78rem;
+    line-height: 1.75;
   }
 
-  .ck { color: #e07b54; }
-  .cs { color: #7ec896; }
-  .cc { color: #6b7a8d; font-style: italic; }
-  .cf { color: #79b8ff; }
+  .token-comment { color: #8d8a80; }
+  .token-keyword { color: #f09c75; }
+  .token-string { color: #a6d59f; }
+  .token-function { color: #8dbcf3; }
 
-  /* ── CONTACT ── */
-  .contact-inner {
+  .shop-shot {
+    border-top: 1px solid rgba(247, 243, 234, 0.16);
+    padding: 1rem;
+  }
+
+  .shop-shot img {
+    width: min(760px, 100%);
+    margin: 0 auto;
+    border: 1px solid rgba(247, 243, 234, 0.2);
+  }
+
+  .contact {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: center;
+    grid-template-columns: minmax(0, 0.9fr) minmax(320px, 0.7fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: start;
   }
 
-  .contact-text {
-    font-size: 1.75rem;
-    font-weight: 300;
-    line-height: 1.4;
-    color: var(--ink);
+  .contact h2 { margin-bottom: 1.5rem; }
+
+  .contact p {
+    max-width: 720px;
+    color: var(--muted);
+    font-size: clamp(1.1rem, 2vw, 1.45rem);
   }
 
-  .contact-text em { font-style: italic; color: var(--rust); }
-  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-links {
+    display: grid;
+    border-top: 1px solid var(--line);
+  }
 
-  .contact-link {
+  .contact-links a {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 1.25rem 0;
-    border-bottom: 1px solid var(--warm-light);
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--line);
     text-decoration: none;
-    color: var(--ink);
-    font-size: 1rem;
-    font-weight: 300;
-    transition: color 0.2s;
   }
 
-  .contact-link:first-child { border-top: 1px solid var(--warm-light); }
-  .contact-link:hover { color: var(--rust); }
+  .contact-links a:hover { color: var(--green); }
 
-  .contact-link-label {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    font-weight: 300;
-    color: var(--warm-mid);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  /* ── FOOTER ── */
   footer {
-    padding: 2rem 4rem;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    gap: 1rem;
+    padding: 1.4rem clamp(1rem, 4vw, 3rem);
   }
 
   .footer-copy {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    font-weight: 300;
-    color: var(--warm-mid);
-    letter-spacing: 0.06em;
-  }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes grow {
-    0%, 100% { width: 30px; opacity: 0.4; }
-    50% { width: 50px; opacity: 1; }
+    color: var(--muted);
+    font-size: 0.7rem;
   }
 
   .reveal {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
+    transform: translateY(18px);
+    transition: opacity 600ms ease, transform 600ms ease;
   }
 
-  .reveal.visible { opacity: 1; transform: none; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    header { padding: 2rem; }
-    section { padding: 4rem 2rem; }
-    footer { padding: 1.5rem 2rem; }
-    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-    .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
-    .process-grid { grid-template-columns: 1fr 1fr; }
-    .case-top { grid-template-columns: 60px 1fr; }
-    .case-imgs.strip-4 { grid-template-columns: repeat(2, 1fr); }
-    nav { gap: 1.5rem; }
-    .stats-row { gap: 1.5rem; }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
   }
 
-@media (max-width: 600px) {
-  header { padding: 1.5rem; min-height: auto; padding-bottom: 3rem; }
-  section { padding: 3rem 1.5rem; }
-  nav { display: none; }
-  .case-top { grid-template-columns: 1fr; gap: 0.5rem; }
-  .case-num { display: none; }
-  .case-imgs.strip-3, .case-imgs.strip-4 { grid-template-columns: repeat(2, 1fr); }
-  h1 { font-size: 4.5rem; }
-  .design-grid { grid-template-columns: repeat(2, 1fr); }
-  .hero-footer {
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+    .reveal { opacity: 1; transform: none; }
   }
-  .stats-row {
-    flex-direction: row;
-    justify-content: center;
-    gap: 2rem;
-  }
-  .stat-item { text-align: center; }
-  .stat-label { font-size: 0.55rem; }
-  .process-grid { grid-template-columns: 1fr; }
-  .process-step {
-    border-right: none;
-    border-bottom: 1px solid var(--warm-light);
-    padding: 1.5rem 0;
-  }
-  .process-step:not(:first-child) { padding-left: 0; }
-  .process-step:last-child { border-bottom: none; }
-  .hero-actions {
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-top: 1.5rem;
-  }
-  .btn {
-    width: 100%;
-    justify-content: center;
-  }
-  .hero-sub { margin-top: 1.5rem; }
-}
 
-.stats-row {
-  flex-direction: row;
-  justify-content: center;
-  gap: 2rem;
-}
+  @media (max-width: 1050px) {
+    .hero,
+    .split,
+    .code-layout,
+    .contact {
+      grid-template-columns: 1fr;
+    }
 
-.stat-item { text-align: center; }
+    .hero-board {
+      max-width: 720px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .feature-image { min-height: 460px; }
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+    .metric:nth-child(2) { border-right: 0; }
+    .process-grid { grid-template-columns: repeat(2, 1fr); }
+    .code-menu { position: static; }
+  }
+
+  @media (max-width: 760px) {
+    .site-header {
+      position: static;
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    nav {
+      width: 100%;
+      overflow-x: auto;
+      padding-bottom: 0.2rem;
+    }
+
+    .hero {
+      min-height: auto;
+      padding-top: 2rem;
+    }
+
+    h1 { font-size: clamp(4rem, 19vw, 6.4rem); }
+
+    .hero-board,
+    .image-grid,
+    .image-grid.four,
+    .process-grid,
+    .code-context {
+      grid-template-columns: 1fr;
+    }
+
+    .feature-image,
+    .stack-image { min-height: auto; }
+
+    .feature-image img,
+    .stack-image img { aspect-ratio: 4 / 3; }
+
+    .metrics { grid-template-columns: 1fr; }
+    .metric { border-right: 0; }
+
+    .section-heading,
+    .case {
+      grid-template-columns: 1fr;
+    }
+
+    .section-number,
+    .case-index { padding-top: 0; }
+
+    .design-grid { grid-template-columns: 1fr 1fr; }
+
+    .skill-row,
+    .contact-links a,
+    footer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .button { width: 100%; }
+  }
+
+  @media (max-width: 480px) {
+    .design-grid { grid-template-columns: 1fr; }
+    pre { font-size: 0.72rem; }
   }
 </style>
 </head>
 <body>
-
-<!-- ── HERO ── -->
-<header>
-  <div class="header-top">
-    <span class="logo">Jasmine.dev</span>
-    <nav>
+  <header class="site-header" aria-label="Site header">
+    <a class="brand" href="#top">Jasmine Wrightson</a>
+    <nav aria-label="Primary navigation">
       <a href="#about">About</a>
       <a href="#work">Work</a>
       <a href="#designs">Designs</a>
@@ -731,519 +740,447 @@
       <a href="#code">Code</a>
       <a href="#contact">Contact</a>
     </nav>
-  </div>
+  </header>
 
-  <div class="hero-content">
-    <p class="hero-eyebrow">Developer &amp; Design-to-Code Specialist</p>
-    <h1>Jasmine<br><em>Wrightson</em></h1>
-    <p class="hero-sub">I take Photoshop designs and bring them to life as fully interactive, personalised products. Based in the UK, working at the intersection of design craft and frontend engineering.</p>
-    <div class="hero-actions">
-      <a href="Jasmine-Wrightson-CV.pdf" class="btn btn-fill" download>Download CV</a>
-      <a href="https://www.linkedin.com/in/jasmine-wrightson-81663322a/" class="btn" target="_blank" rel="noopener">LinkedIn ↗</a>
-      <a href="#contact" class="btn">Get in touch</a>
-    </div>
-  </div>
-
-  <div class="hero-footer">
-    <span class="scroll-hint"><span class="scroll-line"></span> Scroll to explore</span>
-    <div class="stats-row">
-      <div class="stat-item">
-        <span class="stat-num">99%</span>
-        <span class="stat-label">Live products shipped</span>
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-text reveal">
+        <p class="eyebrow">Developer and design-to-code specialist</p>
+        <h1 id="hero-title">Jasmine <span>Wrightson</span></h1>
+        <p class="hero-copy">I turn Photoshop concepts into fully configured, personalised print products: translating design intent, building the logic in Mediaclip, and carrying work through to live WooCommerce products customers can buy.</p>
+        <p class="role-fit"><strong>Best fit:</strong> frontend or product implementation roles where design accuracy, ecommerce thinking, and production ownership matter.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="Jasmine-Wrightson_CV.pdf" download>Download CV</a>
+          <a class="button" href="https://www.linkedin.com/in/jasmine-wrightson-81663322a/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="button" href="mailto:jjwrightson00@gmail.com">Email</a>
+        </div>
       </div>
-      <div class="stat-item">
-        <span class="stat-num">50+</span>
-        <span class="stat-label">Unique themes</span>
+
+      <div class="hero-board reveal" aria-label="Portfolio highlights">
+        <div class="feature-image">
+          <img src="images/foil-mockup.jpg" alt="Finished foil photobook product mockup">
+        </div>
+        <div class="stack-image">
+          <img src="images/foil-designer.jpg" alt="Foil photobook live in Mediaclip designer">
+        </div>
+        <div class="proof-panel">
+          <p>From product mockup <span>to</span> live personalisation logic.</p>
+          <span class="meta-label">Commercial product plus live builder</span>
+        </div>
       </div>
-      <div class="stat-item">
-        <span class="stat-num">2.5+</span>
-        <span class="stat-label">Years in role</span>
+    </section>
+
+    <div class="metrics" aria-label="Portfolio metrics">
+      <div class="metric reveal">
+        <strong>99%</strong>
+        <span class="meta-label">Live products shipped</span>
+      </div>
+      <div class="metric reveal">
+        <strong>105</strong>
+        <span class="meta-label">Coffee table designs</span>
+      </div>
+      <div class="metric reveal">
+        <strong>130</strong>
+        <span class="meta-label">Polaroid products set up</span>
+      </div>
+      <div class="metric reveal">
+        <strong>£43k+</strong>
+        <span class="meta-label">Tracked net sales across key ranges</span>
       </div>
     </div>
-  </div>
 
-  <div class="hero-gallery">
-    <div class="gallery-track">
-      <img class="gallery-img" src="images/design-2025-review.png" alt="">
-      <img class="gallery-img" src="images/design-love-checkerboard.png" alt="">
-      <img class="gallery-img" src="images/design-you-and-me2.png" alt="">
-      <img class="gallery-img" src="images/design-birthday-teal.png" alt="">
-      <img class="gallery-img" src="images/design-tokyo.png" alt="">
-      <img class="gallery-img" src="images/design-seoul.png" alt="">
-      <img class="gallery-img" src="images/design-valentines-floral.png" alt="">
-      <img class="gallery-img" src="images/design-new-year.png" alt="">
-      <img class="gallery-img" src="images/design-birthday-purple2.png" alt="">
-      <img class="gallery-img" src="images/design-2025-review.png" alt="">
-      <img class="gallery-img" src="images/design-love-checkerboard.png" alt="">
-      <img class="gallery-img" src="images/design-you-and-me2.png" alt="">
-      <img class="gallery-img" src="images/design-birthday-teal.png" alt="">
-      <img class="gallery-img" src="images/design-tokyo.png" alt="">
-      <img class="gallery-img" src="images/design-seoul.png" alt="">
-      <img class="gallery-img" src="images/design-valentines-floral.png" alt="">
-      <img class="gallery-img" src="images/design-new-year.png" alt="">
-      <img class="gallery-img" src="images/design-birthday-purple2.png" alt="">
-    </div>
-  </div>
-</header>
+    <section id="about" aria-labelledby="about-title">
+      <div class="section-heading reveal">
+        <span class="section-number">01</span>
+        <h2 id="about-title">A developer who can read the <em>design file</em>.</h2>
+      </div>
+      <div class="split">
+        <div class="body-copy reveal">
+          <p>I work at the intersection of design and engineering, taking detailed Photoshop concepts from a marketing team and translating them into configured products that customers can personalise and purchase.</p>
+          <p>Most developers either design or they code. I do both: reading layered PSD files, understanding layout and colour intent, then expressing that precisely through platform-specific configuration and scripting.</p>
+          <p>I have been the sole person responsible for getting 99% of a live print-on-demand catalogue from Mediaclip configuration to live WooCommerce product. Where fulfilment required custom work, such as the foil photobook pipeline, I built that too.</p>
+        </div>
+        <div class="skills reveal" aria-label="Core skills">
+          <div class="skill-row">Mediaclip JS engine <span class="tag">Specialist</span></div>
+          <div class="skill-row">PSD translation <span class="tag">Design to product</span></div>
+          <div class="skill-row">Theme and variant logic <span class="tag">Foil, colour, format</span></div>
+          <div class="skill-row">Adobe Photoshop <span class="tag">Daily use</span></div>
+          <div class="skill-row">WooCommerce <span class="tag">Ecommerce</span></div>
+          <div class="skill-row">HTML and CSS <span class="tag">Frontend</span></div>
+          <div class="skill-row">Production workflows <span class="tag">Print on demand</span></div>
+        </div>
+      </div>
+    </section>
 
-<!-- ── ABOUT ── -->
-<section id="about">
-  <div class="section-header reveal">
-    <span class="section-num">01</span>
-    <h2 class="section-title">About <em>me</em></h2>
-  </div>
-  <div class="about-grid reveal">
-    <div class="about-text">
-      <p>I'm a developer who works at the <strong>intersection of design and engineering</strong> — taking detailed Photoshop concepts from a marketing team and translating them into fully configured, interactive products that customers can personalise and purchase.</p>
-      <p>Most developers either design or they code. I do both — reading layered PSD files, understanding design intent, and expressing that precisely through platform-specific configuration and scripting. I've been the <strong>sole person responsible</strong> for getting 99% of a live print-on-demand catalogue from Mediaclip configuration to live WooCommerce product — and where fulfilment required custom work, such as the foil photobook pipeline, I built that too.</p>
-      <p>I'm now looking for a new role where that rare combination — design literacy plus technical execution at scale — is genuinely valued.</p>
-    </div>
-    <ul class="skills-list">
-      <li>Mediaclip JS engine <span class="skill-tag">Specialisation</span></li>
-      <li>Platform configuration <span class="skill-tag">Scripting &amp; logic</span></li>
-      <li>Adobe Photoshop <span class="skill-tag">Daily use</span></li>
-      <li>Design translation <span class="skill-tag">PSD → live product</span></li>
-      <li>Theme &amp; variant logic <span class="skill-tag">Foil, colour, format</span></li>
-      <li>Print-on-demand <span class="skill-tag">Industry</span></li>
-      <li>E-commerce <span class="skill-tag">Domain</span></li>
-      <li>HTML &amp; CSS <span class="skill-tag">Frontend</span></li>
-    </ul>
-  </div>
-</section>
+    <section id="work" aria-labelledby="work-title">
+      <div class="section-heading reveal">
+        <span class="section-number">02</span>
+        <h2 id="work-title">Selected work with <em>commercial weight</em>.</h2>
+      </div>
 
-<!-- ── WORK ── -->
-<section id="work">
-  <div class="section-header reveal">
-    <span class="section-num">02a</span>
-    <h2 class="section-title">Selected <em>work</em></h2>
-  </div>
-
-  <div class="cases">
-
-    <!-- CASE 1 -->
-    <div class="case reveal">
-      <div class="case-top">
-        <span class="case-num">001</span>
-        <div class="case-body">
-          <div class="case-title-row">
-            <h3 class="case-title">Foil Photobooks</h3>
-            <span class="case-badge">Flagship launch</span>
+      <div class="case-list">
+        <article class="case reveal">
+          <span class="case-index">001</span>
+          <div class="case-content">
+            <div class="case-title-row">
+              <h3>Foil Photobooks</h3>
+              <span class="tag">Flagship launch</span>
+            </div>
+            <p class="case-copy">Built a new product category from scratch, covering designer configuration, rendering pipeline, and launch of 41 designs. Eleven were designed personally in Photoshop before being built in code. The range has generated approximately <strong>£24,400 in net sales</strong> across 867 items and 585 orders.</p>
+            <div class="flow" aria-label="Foil Photobooks process">
+              <span>New format scoped</span>
+              <span>Photoshop</span>
+              <span>41 designs live</span>
+              <span>Rendering pipeline</span>
+              <span>Ongoing QA</span>
+            </div>
+            <div class="image-grid">
+              <figure>
+                <img src="images/foil-photoshop.jpg" alt="Foil photobook PSD design file open in Photoshop">
+                <figcaption class="caption">Design file</figcaption>
+              </figure>
+              <figure>
+                <img src="images/foil-designer.jpg" alt="Foil photobook live in Mediaclip designer">
+                <figcaption class="caption">Designer view</figcaption>
+              </figure>
+              <figure>
+                <img src="images/foil-mockup.jpg" alt="Finished foil photobook product mockup">
+                <figcaption class="caption">Final product</figcaption>
+              </figure>
+            </div>
           </div>
-          <p class="case-desc">Built an entirely new product category for the business from scratch — designing and integrating a foil photobook experience including the designer configuration and rendering pipeline, launching 41 designs across the range. Of those, 11 I personally designed in Photoshop before building in code — the rest implemented from marketing-supplied artwork. The range has generated approximately <strong>£24,400 in net sales</strong> (867 items, 585 orders). I continue to monitor all foil orders and proactively fix customer errors to protect fulfilment quality — work well beyond a standard developer remit.</p>
-          <div class="pipeline">
-            <span class="pipe-step">New format scoped</span>
-            <span class="pipe-arrow">→</span>
-            <span class="pipe-step">Photoshop &amp; configuration</span>
-            <span class="pipe-arrow">→</span>
-            <span class="pipe-step">41 designs live</span>
-            <span class="pipe-arrow">→</span>
-            <span class="pipe-step">Rendering pipeline</span>
-            <span class="pipe-arrow">→</span>
-            <span class="pipe-step">Ongoing QA</span>
+        </article>
+
+        <article class="case reveal">
+          <span class="case-index">002</span>
+          <div class="case-content">
+            <div class="case-title-row">
+              <h3>Polaroid Boxes</h3>
+              <span class="tag">Hardware to storefront</span>
+            </div>
+            <p class="case-copy">Conceptualised, designed, and coded a new dieline-based product format. Built Illustrator files for the VeloBlade cutting machine, produced test samples, wrote production documentation, and created the marketing mockups. Since February 2026, <strong>130 products</strong> have been set up with <strong>93 items sold</strong> across 22 orders.</p>
+            <div class="flow" aria-label="Polaroid Boxes process">
+              <span>Concept</span>
+              <span>Illustrator dieline</span>
+              <span>VeloBlade test</span>
+              <span>Production docs</span>
+              <span>Designer config</span>
+              <span>Mockups</span>
+            </div>
+            <div class="image-grid four">
+              <figure>
+                <img src="images/polaroid-dieline.jpg" alt="Polaroid box Illustrator dieline file">
+                <figcaption class="caption">Dieline</figcaption>
+              </figure>
+              <figure>
+                <img src="images/polaroid-sample.jpg" alt="Physical Polaroid box sample cut on VeloBlade">
+                <figcaption class="caption">VeloBlade sample</figcaption>
+              </figure>
+              <figure>
+                <img src="images/polaroid-designer.jpg" alt="Polaroid box live in Mediaclip designer">
+                <figcaption class="caption">Designer view</figcaption>
+              </figure>
+              <figure>
+                <img src="images/polaroid-mockup.jpg" alt="Polaroid box marketing mockup used on product page">
+                <figcaption class="caption">Product page image</figcaption>
+              </figure>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="case-imgs strip-3">
-        <div>
-          <div class="img-placeholder"><img src="images/foil-photoshop.jpg" alt="Foil photobook PSD design file open in Photoshop"></div>
-          <p class="img-caption">Design file</p>
-        </div>
-        <div>
-          <div class="img-placeholder"><img src="images/foil-designer.jpg" alt="Foil photobook live in Mediaclip designer"></div>
-          <p class="img-caption">Designer view</p>
-        </div>
-        <div>
-          <div class="img-placeholder"><img src="images/foil-mockup.jpg" alt="Finished foil photobook product mockup"></div>
-          <p class="img-caption">Final product</p>
-        </div>
-      </div>
-    </div>
+        </article>
 
-    <!-- CASE 2 -->
-    <div class="case reveal">
-      <div class="case-top">
-        <span class="case-num">002</span>
-        <div class="case-body">
-          <div class="case-title-row">
-            <h3 class="case-title">Polaroid Boxes</h3>
-            <span class="case-badge">Beyond job description</span>
+        <article class="case reveal">
+          <span class="case-index">003</span>
+          <div class="case-content">
+            <div class="case-title-row">
+              <h3>Weddings Range</h3>
+              <span class="tag">Strategic delivery</span>
+            </div>
+            <p class="case-copy">Leading technical delivery for a new Weddings range projected to generate <strong>£80,000 per year</strong>. Learned VDP products in Mediaclip from scratch, worked directly with Mediaclip to resolve platform blockers, and built 23 designs across save the date cards and invitations.</p>
+            <div class="flow" aria-label="Weddings Range process">
+              <span>VDP learned</span>
+              <span>Mediaclip liaison</span>
+              <span>23 designs ready</span>
+              <span>Menu UI</span>
+              <span>Full collection ongoing</span>
+            </div>
+            <div class="image-grid">
+              <figure>
+                <img src="images/weddings-psd.jpg" alt="Weddings range PSD design file open in Photoshop">
+                <figcaption class="caption">Before Photoshop</figcaption>
+              </figure>
+              <figure>
+                <img src="images/weddings-designer.jpg" alt="Wedding invite live in Mediaclip designer with VDP fields">
+                <figcaption class="caption">Live VDP fields</figcaption>
+              </figure>
+              <figure>
+                <img src="images/weddings-mockup.jpg" alt="Finished wedding invite product mockup">
+                <figcaption class="caption">Finished product</figcaption>
+              </figure>
+            </div>
           </div>
-          <p class="case-desc">Conceptualised, designed, and coded a brand new product format using a dieline-based designer experience never previously used at the company. Built the Illustrator files for the VeloBlade cutting machine, physically operated the machine to produce test samples, and wrote full step-by-step production documentation for the production team. Also created all marketing mock-ups used on every product page — removing the need for a photography shoot. 130 products set up since launch in February 2026; <strong>93 items sold across 22 orders</strong>. This project spanned hardware, production, design, documentation, and software.</p>
-          <div class="pipeline">
-            <span class="pipe-step">Concept &amp; design</span>
-            <span class="pipe-arrow">→</span>
-            <span class="pipe-step">Illustrator dieline</span>
-            <span class="pipe-arrow">→</span>
-            <span class="pipe-step">VeloBlade testing</span>
-            <span class="pipe-arrow">→</span>
-            <span class="pipe-step">Production docs</span>
-            <span class="pipe-arrow">→</span>
-            <span class="pipe-step">Designer config</span>
-            <span class="pipe-arrow">→</span>
-            <span class="pipe-step">Marketing mock-ups</span>
-            <span class="pipe-arrow">→</span>
-            <span class="pipe-step">130 products live</span>
+        </article>
+
+        <article class="case reveal">
+          <span class="case-index">004</span>
+          <div class="case-content">
+            <div class="case-title-row">
+              <h3>Coffee Table Photobooks</h3>
+              <span class="tag">Scale and revenue</span>
+            </div>
+            <p class="case-copy">Created <strong>105 new designs</strong> since March 2025, configured end to end through Mediaclip. Added clipart elements into a shared library, made solid-colour cliparts personalisable, and implemented 50+ backgrounds. The range has generated approximately <strong>£19,230 in net sales</strong>.</p>
+            <div class="flow" aria-label="Coffee Table Photobooks process">
+              <span>PSD implemented</span>
+              <span>Shared clipart</span>
+              <span>Colour personalisation</span>
+              <span>105 designs</span>
+              <span>£19,230 net sales</span>
+            </div>
+            <div class="image-grid">
+              <figure>
+                <img src="images/coffeetable-backgrounds.jpg" alt="Background library showing more than 50 designs">
+                <figcaption class="caption">Background library</figcaption>
+              </figure>
+              <figure>
+                <img src="images/coffeetable-clipart.jpg" alt="Clipart library with colour personalisation">
+                <figcaption class="caption">Personalised clipart</figcaption>
+              </figure>
+              <figure>
+                <img src="images/coffeetable-live2.jpg" alt="Finished coffee table photobook product">
+                <figcaption class="caption">Finished product</figcaption>
+              </figure>
+            </div>
           </div>
-        </div>
+        </article>
       </div>
-      <div class="case-imgs strip-4">
-        <div>
-          <div class="img-placeholder"><img src="images/polaroid-dieline.jpg" alt="Polaroid box Illustrator dieline file"></div>
-          <p class="img-caption">Dieline</p>
-        </div>
-        <div>
-          <div class="img-placeholder"><img src="images/polaroid-sample.jpg" alt="Physical Polaroid box test sample cut on VeloBlade"></div>
-          <p class="img-caption">VeloBlade sample</p>
-        </div>
-        <div>
-          <div class="img-placeholder"><img src="images/polaroid-designer.jpg" alt="Polaroid box live in Mediaclip designer"></div>
-          <p class="img-caption">Designer view</p>
-        </div>
-        <div>
-          <div class="img-placeholder"><img src="images/polaroid-mockup.jpg" alt="Polaroid box marketing mock-up used on product page"></div>
-          <p class="img-caption">Product page image</p>
-        </div>
-      </div>
-    </div>
+    </section>
 
-    <!-- CASE 3 -->
-    <div class="case reveal">
-      <div class="case-top">
-        <span class="case-num">003</span>
-        <div class="case-body">
-          <div class="case-title-row">
-            <h3 class="case-title">Weddings range</h3>
-            <span class="case-badge">Strategic project</span>
+    <section id="designs" aria-labelledby="designs-title">
+      <div class="section-heading reveal">
+        <span class="section-number">03</span>
+        <h2 id="designs-title">Personal design work, carried through to <em>live products</em>.</h2>
+      </div>
+      <div class="design-grid reveal">
+        <figure>
+          <img src="images/design-2025-review.png" alt="2025 A Year in Review foil photobook design">
+          <figcaption class="caption">2025 Year in Review - foil photobook</figcaption>
+        </figure>
+        <figure>
+          <img src="images/design-love-checkerboard.png" alt="LOVE checkerboard foil photobook design">
+          <figcaption class="caption">LOVE checkerboard - foil photobook</figcaption>
+        </figure>
+        <figure>
+          <img src="images/design-you-and-me2.png" alt="You and Me Forever and Always foil photobook design">
+          <figcaption class="caption">You and Me - foil photobook</figcaption>
+        </figure>
+        <figure>
+          <img src="images/design-birthday-teal.png" alt="Happy Birthday teal foil photobook design">
+          <figcaption class="caption">Happy Birthday teal - foil cover</figcaption>
+        </figure>
+        <figure>
+          <img src="images/design-tokyo.png" alt="Tokyo Japan photobook design">
+          <figcaption class="caption">Tokyo travel - coffee table book</figcaption>
+        </figure>
+        <figure>
+          <img src="images/design-seoul.png" alt="Seoul South Korea photobook design">
+          <figcaption class="caption">Seoul travel - coffee table book</figcaption>
+        </figure>
+        <figure>
+          <img src="images/design-valentines-floral.png" alt="Happy Valentines Day black and gold floral foil photobook design">
+          <figcaption class="caption">Valentines floral - foil photobook</figcaption>
+        </figure>
+        <figure>
+          <img src="images/design-new-year.png" alt="Happy New Year black and gold fireworks foil photobook design">
+          <figcaption class="caption">Happy New Year - foil photobook</figcaption>
+        </figure>
+        <figure>
+          <img src="images/design-birthday-purple2.png" alt="Happy Birthday purple and gold balloons foil photobook design">
+          <figcaption class="caption">Happy Birthday purple - foil cover</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="process" aria-labelledby="process-title">
+      <div class="section-heading reveal">
+        <span class="section-number">04</span>
+        <h2 id="process-title">A practical path from artwork to <em>production</em>.</h2>
+      </div>
+      <div class="process-grid">
+        <article class="process-step reveal">
+          <span class="meta-label">Step 01</span>
+          <div>
+            <h3 class="step-title">Read the design</h3>
+            <p>Understand layer structure, fonts, colour intent, and how the product should behave when personalised.</p>
           </div>
-          <p class="case-desc">Currently leading the technical delivery of a new Weddings range projected to generate <strong>£80,000 per year</strong> in revenue — an ongoing project that cannot launch without my involvement. Dedicated 24+ hours in early 2026 to learning VDP (variable data printing) products in Mediaclip from scratch, a method entirely new to me. Worked directly with Mediaclip to resolve platform-level issues blocking the launch. The collection spans four stages of the wedding journey — Engagement, Wedding Day, Guests' Experience, and After-Wedding Memories — covering products such as save the date cards, wedding invitations, menu cards, place cards, seating charts, guest books, wedding photobooks, and personalised keepsakes. 23 designs across the first two product types already built, with a planned range of 27 distinct product types across the full collection.</p>
-          <div class="pipeline">
-            <span class="pipe-step">VDP method learned</span>
-            <span class="pipe-arrow">→</span>
-            <span class="pipe-step">Mediaclip liaison</span>
-            <span class="pipe-arrow">→</span>
-            <span class="pipe-step">Save the Date &amp; Invites built</span>
-            <span class="pipe-arrow">→</span>
-            <span class="pipe-step">23 designs ready to go live</span>
-            <span class="pipe-arrow">→</span>
-            <span class="pipe-step">Menu UI in progress</span>
-            <span class="pipe-arrow">→</span>
-            <span class="pipe-step">Full collection ongoing</span>
+        </article>
+        <article class="process-step reveal">
+          <span class="meta-label">Step 02</span>
+          <div>
+            <h3 class="step-title">Extract assets</h3>
+            <p>Prepare clipart, backgrounds, fonts, foil variants, and format-specific assets for build.</p>
           </div>
-        </div>
-      </div>
-      <div class="case-imgs strip-3">
-        <div>
-          <div class="img-placeholder"><img src="images/weddings-psd.jpg" alt="Weddings range PSD design file open in Photoshop"></div>
-          <p class="img-caption">Before — Photoshop</p>
-        </div>
-        <div>
-          <div class="img-placeholder"><img src="images/weddings-designer.jpg" alt="Wedding invite live in Mediaclip designer with VDP recipient name field"></div>
-          <p class="img-caption">Live in designer — VDP fields</p>
-        </div>
-        <div>
-          <div class="img-placeholder"><img src="images/weddings-mockup.jpg" alt="Finished wedding invite product mockup"></div>
-          <p class="img-caption">Finished product</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- CASE 4 -->
-    <div class="case reveal">
-      <div class="case-top">
-        <span class="case-num">004</span>
-        <div class="case-body">
-          <div class="case-title-row">
-            <h3 class="case-title">Coffee Table Photobooks</h3>
-            <span class="case-badge">Scale &amp; revenue</span>
+        </article>
+        <article class="process-step reveal">
+          <span class="meta-label">Step 03</span>
+          <div>
+            <h3 class="step-title">Configure logic</h3>
+            <p>Build selector rules, variants, font loading, and collage creation in Mediaclip's JavaScript engine.</p>
           </div>
-          <p class="case-desc">Created 105 new coffee table photobook designs since March 2025, each configured end-to-end through the Mediaclip platform. Every clipart element used across these designs has been added to a shared library in the designer, making them available for customers to use across any other book — and where cliparts are solid colours, I've made them fully personalisable so customers can change the colours to suit their own style. Additionally, I've dedicated 21+ hours to implementing 50+ new background designs available to all customers across the designer. The range has generated approximately <strong>£19,230 in net sales</strong> (771 items, 530 orders) across the period — all delivered alongside other project work with no drop in output or quality.</p>
-          <div class="pipeline">
-            <span class="pipe-step">PSD implemented</span>
-            <span class="pipe-arrow">→</span>
-            <span class="pipe-step">Clipart &amp; backgrounds library</span>
-            <span class="pipe-arrow">→</span>
-            <span class="pipe-step">Colour personalisation</span>
-            <span class="pipe-arrow">→</span>
-            <span class="pipe-step">105 designs live</span>
-            <span class="pipe-arrow">→</span>
-            <span class="pipe-step">£19,230 net sales</span>
+        </article>
+        <article class="process-step reveal">
+          <span class="meta-label">Step 04</span>
+          <div>
+            <h3 class="step-title">Ship live</h3>
+            <p>Preview, test, connect to WooCommerce, and keep an eye on fulfilment quality once orders land.</p>
           </div>
-        </div>
+        </article>
       </div>
-      <div class="case-imgs strip-3">
-        <div>
-          <div class="img-placeholder"><img src="images/coffeetable-backgrounds.jpg" alt="Background library showing 50+ designs available"></div>
-          <p class="img-caption">Background library — 50+ designs available</p>
-        </div>
-        <div>
-          <div class="img-placeholder"><img src="images/coffeetable-clipart.jpg" alt="Clipart library with colour personalisation"></div>
-          <p class="img-caption">Clipart library with colour personalisation</p>
-        </div>
-        <div>
-          <div class="img-placeholder"><img src="images/coffeetable-live2.jpg" alt="Finished coffee table photobook product"></div>
-          <p class="img-caption">Finished product</p>
-        </div>
+    </section>
+
+    <section id="code" aria-labelledby="code-title">
+      <div class="section-heading reveal">
+        <span class="section-number">05</span>
+        <h2 id="code-title">Code examples with <em>production context</em>.</h2>
       </div>
-    </div>
+      <div class="code-layout">
+        <aside class="code-menu reveal" aria-label="Code examples">
+          <a href="#foil-code">Foil colour logic <span class="code-label">JavaScript</span></a>
+          <a href="#pipeline-code">File download pipeline <span class="code-label">VB.NET</span></a>
+          <a href="#woocommerce-code">Shop collection block <span class="code-label">PHP / CSS</span></a>
+        </aside>
 
-  </div>
-</section>
+        <div class="code-stack">
+          <div class="code-context reveal" aria-label="Code impact summary">
+            <div class="context-card">
+              <span class="meta-label">Product logic</span>
+              <strong>6 foil variants</strong>
+            </div>
+            <div class="context-card">
+              <span class="meta-label">Production workflow</span>
+              <strong>Hourly reporting</strong>
+            </div>
+            <div class="context-card">
+              <span class="meta-label">Ecommerce block</span>
+              <strong>No plugin dependency</strong>
+            </div>
+          </div>
 
-<!-- ── DESIGNS ── -->
-<section id="designs">
-  <div class="section-header reveal">
-    <span class="section-num">02b</span>
-    <h2 class="section-title">Selected <em>designs</em></h2>
-  </div>
-  <p style="font-size: 1.05rem; font-weight: 300; color: var(--warm-mid); line-height: 1.8; max-width: 600px; margin-bottom: 2.5rem;">Alongside implementation work, I design a proportion of products personally — from initial concept in Photoshop through to the live configured product.</p>
-  <div class="design-grid reveal">
-    <div class="design-item"><img src="images/design-2025-review.png" alt="2025 A Year in Review foil photobook design"></div>
-    <div class="design-item"><img src="images/design-love-checkerboard.png" alt="LOVE checkerboard foil photobook design"></div>
-    <div class="design-item"><img src="images/design-you-and-me2.png" alt="You and Me Forever and Always foil photobook design"></div>
-    <div class="design-item"><img src="images/design-birthday-teal.png" alt="Happy Birthday teal foil photobook design"></div>
-    <div class="design-item"><img src="images/design-tokyo.png" alt="Tokyo Japan photobook design"></div>
-    <div class="design-item"><img src="images/design-seoul.png" alt="Seoul South Korea photobook design"></div>
-    <div class="design-item"><img src="images/design-valentines-floral.png" alt="Happy Valentines Day black and gold floral foil photobook design"></div>
-    <div class="design-item"><img src="images/design-new-year.png" alt="Happy New Year black and gold fireworks foil photobook design"></div>
-    <div class="design-item"><img src="images/design-birthday-purple2.png" alt="Happy Birthday purple and gold balloons foil photobook design"></div>
-  </div>
-</section>
+          <article class="code-block reveal" id="foil-code">
+            <header>
+              <span>Foil colour variant logic</span>
+              <span class="code-label">Mediaclip JavaScript</span>
+            </header>
+            <p>Reads the customer's chosen emboss option, maps it to the correct colour, and applies it as a foil spot colour in the render.</p>
+            <pre><code><span class="token-comment">// Read customer's chosen foil colour option</span>
+<span class="token-keyword">const</span> foil = <span class="token-keyword">this</span>.context.<span class="token-function">getOption</span>(<span class="token-string">"embossColour"</span>, <span class="token-string">"gold"</span>);
+<span class="token-keyword">const</span> embossColours = {
+  gold: <span class="token-string">"#c08b4b"</span>,
+  silver: <span class="token-string">"#cacaca"</span>,
+  holographic: <span class="token-string">"#e2e2e2"</span>,
+  green: <span class="token-string">"#037225"</span>,
+  blue: <span class="token-string">"#2330e3"</span>,
+  red: <span class="token-string">"#f62e27"</span>
+};
 
-<!-- ── PROCESS ── -->
-<section id="process">
-  <div class="section-header reveal">
-    <span class="section-num">03</span>
-    <h2 class="section-title">How I <em>work</em></h2>
-  </div>
-  <div class="process-grid">
-    <div class="process-step reveal">
-      <span class="process-step-num">Step 01</span>
-      <h3 class="process-step-title">Read the design</h3>
-      <p class="process-step-desc">I start in Photoshop — understanding layer structure, font choices, colour intent, and how the design should behave when personalised.</p>
-    </div>
-    <div class="process-step reveal">
-      <span class="process-step-num">Step 02</span>
-      <h3 class="process-step-title">Extract assets</h3>
-      <p class="process-step-desc">Clipart, backgrounds, and elements are prepared and exported. Fonts are identified and loaded. Foil and colour variants are mapped out.</p>
-    </div>
-    <div class="process-step reveal">
-      <span class="process-step-num">Step 03</span>
-      <h3 class="process-step-title">Configure in JS</h3>
-      <p class="process-step-desc">The Mediaclip theme is built using platform-specific JavaScript — selector logic, variant conditions, font loading, and collage creation all written from scratch within Mediaclip's own engine.</p>
-    </div>
-    <div class="process-step reveal">
-      <span class="process-step-num">Step 04</span>
-      <h3 class="process-step-title">Ship to production</h3>
-      <p class="process-step-desc">The product is previewed, tested across variants, then pushed live — ready for customers to personalise and order in real time.</p>
-    </div>
-  </div>
-</section>
+collage.<span class="token-function">addClipart</span>({
+  id: <span class="token-string">"$(package:printondemandworldwide/default)/assets/elements/clipart/shootingstar"</span>,
+  height: collage.width / 1.5,
+  width: collage.width / 1.5,
+  x: -320,
+  y: -325,
+  colorize: embossColours[foil] || embossColours.gold,
+  colorizeSpotColor: <span class="token-string">"FoilStamp"</span>
+});</code></pre>
+          </article>
 
-<!-- ── CODE ── -->
-<section id="code">
-  <div class="section-header reveal">
-    <span class="section-num">04</span>
-    <h2 class="section-title">Code <em>examples</em></h2>
-  </div>
-
-  <div class="code-blocks">
-
-   <div class="code-card reveal">
-      <div class="code-card-header">
-        <span class="code-card-title">Foil colour variant logic — Mediaclip theme</span>
-        <span class="code-card-lang">JavaScript</span>
-      </div>
-      <div class="code-card-desc">Each foil photobook supports 6 emboss colour options. This selector logic reads the customer's chosen option, maps it to the correct hex value, then applies it to the clipart element as a spot colour used in the foil render.</div>
-      <div class="code-block"><pre><span class="cc">// Read customer's chosen foil colour option</span>
-<span class="ck">const</span> foil = <span class="ck">this</span>.context.<span class="cf">getOption</span>(<span class="cs">"embossColour"</span>, <span class="cs">"gold"</span>);
-<span class="ck">let</span> embossColour;
-
-<span class="ck">if</span> (foil === <span class="cs">"gold"</span>) {
-  embossColour = <span class="cs">"#c08b4b"</span>;
-} <span class="ck">else if</span> (foil === <span class="cs">"silver"</span>) {
-  embossColour = <span class="cs">"#cacaca"</span>;
-} <span class="ck">else if</span> (foil === <span class="cs">"holographic"</span>) {
-  embossColour = <span class="cs">"#e2e2e2"</span>;
-} <span class="ck">else if</span> (foil === <span class="cs">"green"</span>) {
-  embossColour = <span class="cs">"#037225"</span>;
-} <span class="ck">else if</span> (foil === <span class="cs">"blue"</span>) {
-  embossColour = <span class="cs">"#2330e3"</span>;
-} <span class="ck">else if</span> (foil === <span class="cs">"red"</span>) {
-  embossColour = <span class="cs">"#f62e27"</span>;
-}
-
-<span class="cc">// Apply the emboss colour to the clipart as a foil spot colour</span>
-collage.<span class="cf">addClipart</span>({
-  id: <span class="cs">"$(package:printondemandworldwide/default)/assets/elements/clipart/shootingstar"</span>,
-  height: collage.width / <span class="num">1.5</span>,
-  width: collage.width / <span class="num">1.5</span>,
-  x: <span class="num">-320</span>,
-  y: <span class="num">-325</span>,
-  colorize: embossColour,
-  colorizeSpotColor: <span class="cs">'FoilStamp'</span>,
-});</pre></div>
-    </div>
-
-   <div class="code-card reveal">
-      <div class="code-card-header">
-        <span class="code-card-title">Hourly file download process — Photobubble pipeline</span>
-        <span class="code-card-lang">VB.NET</span>
-      </div>
-      <div class="code-card-desc">Re-engineered the Photobubble file download process to run on an hourly schedule, replacing a manual process causing consistent delays to the 10:15 production report. Reports now run on time 99% of the time. <em>The snippets below are extracted from the full class to illustrate the key stages of the pipeline.</em></div>
-      <div class="code-block"><pre><span class="cc">' ── Snippet 1: Query pending orders from the database ──</span>
-sql = <span class="cs">"SELECT d.DetailID, de.OrderName,
-       if(reprint &gt; 0, d.coverfile, de.CoverFile) as 'CoverFile',
+          <article class="code-block reveal" id="pipeline-code">
+            <header>
+              <span>Hourly file download process</span>
+              <span class="code-label">Photobubble VB.NET</span>
+            </header>
+            <p>Reworked the file download process to run hourly, replacing a manual step that delayed the 10:15 production report.</p>
+            <pre><code><span class="token-comment">' Query pending orders from the database</span>
+sql = <span class="token-string">"SELECT d.DetailID, de.OrderName,
        ifnull(bes.BES, 0) AS 'Bespoke', reprint
-       FROM (tblpoddetails d, tbl_pod_extdetails de, tblpodlibrary l)
-       LEFT JOIN (SELECT LibID, optionid, count(*) AS 'BES'
-           FROM tbl_pod_bespokeoptions WHERE OptionID in (2,6,7)
-           GROUP BY libid) bes ON bes.LibID = l.LibID
-       WHERE de.headid IN (SELECT headid FROM tblpodheader
-           WHERE podcustid = 835)
-       AND d.DatePrintSent IS NULL AND de.TextAcqDate IS NULL
-       AND (coversetup &lt;&gt; 2 OR textsetup &lt;&gt; 2)"</span>
+       FROM tblpoddetails d
+       LEFT JOIN bespoke_options bes ON bes.LibID = d.LibID
+       WHERE d.DatePrintSent IS NULL
+       AND de.TextAcqDate IS NULL"</span>
 
-<span class="cc">' ── Snippet 2: Route file to correct location based on bespoke/reprint flags ──</span>
-<span class="ck">If</span> bespoke = <span class="num">1</span> <span class="ck">And</span> FileTypeID = <span class="num">1</span> <span class="ck">Then</span>
-  <span class="ck">If</span> reprint = <span class="ck">True Then</span>
-    Me.DownloadLocation = Network.<span class="cf">GetFilePath</span>(<span class="cs">"I:\Outgoing\835\" & FileName</span>)
-  <span class="ck">Else</span>
-    Me.DownloadLocation = WorkflowDir & <span class="cs">"TempStore\Photobubble\" & FileName</span>
-  <span class="ck">End If</span>
-<span class="ck">Else</span>
-  Me.DownloadLocation = Network.<span class="cf">GetFilePath</span>(<span class="cs">"I:\Outgoing\835\" & FileName</span>)
-<span class="ck">End If</span>
+<span class="token-comment">' Route bespoke files through the split transfer path</span>
+<span class="token-keyword">If</span> bespoke = <span class="token-keyword">True Then</span>
+  qi = <span class="token-keyword">New</span> <span class="token-function">QueueItem</span>(req.Identity, Shard.ShardName,
+       DetailID & <span class="token-string">"DL"</span>, Batch, URL, <span class="token-keyword">True</span>,
+       FileTypeID, QueueItem.TransferMethod.PB_Split,
+       DownloadLocation)
+<span class="token-keyword">Else</span>
+  qi = <span class="token-keyword">New</span> <span class="token-function">QueueItem</span>(req.Identity, Shard.ShardName,
+       DetailID & <span class="token-string">"DL"</span>, Batch, URL, <span class="token-keyword">True</span>,
+       FileTypeID, QueueItem.TransferMethod.PB,
+       DownloadLocation)
+<span class="token-keyword">End If</span></code></pre>
+          </article>
 
-<span class="cc">' ── Snippet 3: Build queue item and dispatch to Impogician ──</span>
-<span class="ck">If</span> bespoke = <span class="ck">True Then</span>
-  qi = <span class="ck">New</span> <span class="cf">QueueItem</span>(req.Identity, Shard.ShardName,
-       DetailID & <span class="cf">Left</span>(FileTypeID.ToString, <span class="num">1</span>) & <span class="cs">"DL"</span>,
-       <span class="cf">Format</span>(Batch, RefDateTime), URL, <span class="ck">True</span>, FileTypeID,
-       QueueItem.TransferMethod.PB_Split,
-       DownloadLocation, ClusterType.Debugging)
-<span class="ck">Else</span>
-  qi = <span class="ck">New</span> <span class="cf">QueueItem</span>(req.Identity, Shard.ShardName,
-       DetailID & <span class="cf">Left</span>(FileTypeID.ToString, <span class="num">1</span>) & <span class="cs">"DL"</span>,
-       <span class="cf">Format</span>(Batch, RefDateTime), URL, <span class="ck">True</span>, FileTypeID,
-       QueueItem.TransferMethod.PB,
-       DownloadLocation, ClusterType.Debugging)
-<span class="ck">End If</span>
+          <article class="code-block reveal" id="woocommerce-code">
+            <header>
+              <span>Shop the Collection block</span>
+              <span class="code-label">WooCommerce PHP / CSS</span>
+            </header>
+            <p>Reads the current product tags, identifies the matching collection, and renders related products below the product summary without a plugin dependency.</p>
+            <pre><code><span class="token-function">add_action</span>(<span class="token-string">'woocommerce_after_single_product_summary'</span>,
+           <span class="token-string">'add_shop_collection_block'</span>, 5);
 
-qi.<span class="cf">Export</span>(Shard.Endpoints.Realms(<span class="num">1</span>).RootDirectory,
-          Shard.Endpoints.MagicDir)</pre></div>
-    </div>
+<span class="token-keyword">function</span> <span class="token-function">add_shop_collection_block</span>() {
+  <span class="token-keyword">if</span> (!<span class="token-function">is_product</span>()) <span class="token-keyword">return</span>;
+  <span class="token-keyword">global</span> $product;
 
-    <div class="code-card reveal">
-      <div class="code-card-header">
-        <span class="code-card-title">Shop the Collection block — WooCommerce</span>
-        <span class="code-card-lang">PHP / CSS</span>
+  $terms = <span class="token-function">wp_get_post_terms</span>($product-&gt;<span class="token-function">get_id</span>(), <span class="token-string">'product_tag'</span>);
+  $collection = <span class="token-function">find_collection_slug</span>($terms, <span class="token-string">'wedding-collection'</span>);
+
+  <span class="token-keyword">if</span> (!$collection) <span class="token-keyword">return</span>;
+  <span class="token-keyword">echo</span> <span class="token-function">do_shortcode</span>(<span class="token-string">'[products limit="8" columns="5" tag="'</span> .
+    $collection . <span class="token-string">'" visibility="any" exclude="'</span> .
+    $product-&gt;<span class="token-function">get_id</span>() . <span class="token-string">'"]'</span>);
+}</code></pre>
+            <div class="shop-shot">
+              <img src="images/woocommerce-collection-live.jpg" alt="Shop the Collection block live on photobubble.co.uk">
+            </div>
+          </article>
+        </div>
       </div>
-      <div class="code-card-desc">A custom WooCommerce hook that reads the current product's tags, identifies which collection it belongs to, and dynamically renders a "Shop the Collection" grid of related products beneath the product summary. Used across the site to surface cross-sell products without any plugin dependency. Background colours and collection styling are defined in collaboration with the marketing team.</div>
-      <div class="code-block"><pre><span class="cc">// Hook into WooCommerce after product summary</span>
-<span class="cf">add_action</span>(<span class="cs">'woocommerce_after_single_product_summary'</span>,
-           <span class="cs">'add_shop_collection_block'</span>, <span class="num">5</span>);
+    </section>
 
-<span class="ck">function</span> <span class="cf">add_shop_collection_block</span>() {
-  <span class="ck">if</span> (!<span class="cf">is_product</span>()) <span class="ck">return</span>;
-  <span class="ck">global</span> $product;
-
-  <span class="cc">// Get product tags and find matching collection</span>
-  $terms = <span class="cf">wp_get_post_terms</span>($product-><span class="cf">get_id</span>(), <span class="cs">'product_tag'</span>);
-  <span class="ck">if</span> (<span class="cf">empty</span>($terms)) <span class="ck">return</span>;
-
-  $collection = <span class="ck">null</span>;
-  <span class="ck">foreach</span> ($terms <span class="ck">as</span> $term) {
-    <span class="ck">if</span> (<span class="cf">strpos</span>($term->slug, <span class="cs">'wedding-collection'</span>) !== <span class="ck">false</span>) {
-      $collection = $term->slug;
-      <span class="ck">break</span>;
-    }
-  }
-  <span class="ck">if</span> (!$collection) <span class="ck">return</span>;
-
-  <span class="cc">// Format collection name for display</span>
-  $nice_name = <span class="cf">ucwords</span>(<span class="cf">str_replace</span>(<span class="cs">'-'</span>, <span class="cs">' '</span>,
-    <span class="cf">str_replace</span>(<span class="cs">'wedding-collection'</span>, <span class="cs">''</span>, $collection)));
-
-  <span class="cc">// Render collection grid via shortcode</span>
-  <span class="ck">echo</span> <span class="cs">'&lt;div class="shop-collection"&gt;'</span>;
-  <span class="ck">echo</span> <span class="cs">'&lt;h2&gt;Shop the '</span> . $nice_name . <span class="cs">' Collection&lt;/h2&gt;'</span>;
-  <span class="ck">echo</span> <span class="cf">do_shortcode</span>(
-    <span class="cs">'[products limit="8" columns="5" tag="'</span> . $collection .
-    <span class="cs">'" visibility="any" exclude="'</span> . $product-><span class="cf">get_id</span>() . <span class="cs">'"]'</span>
-  );
-  <span class="ck">echo</span> <span class="cs">'&lt;/div&gt;'</span>;
-}
-
-<span class="cc">/* Collection container */</span>
-.<span class="cf">shop-collection</span> {
-  max-width: <span class="num">1000px</span>;
-  margin: <span class="num">-50px</span> auto <span class="num">40px</span>;
-  padding: <span class="num">20px</span>;
-  background-color: <span class="cs">#ebebec</span>;
-  border-radius: <span class="num">6px</span>;
-}
-
-<span class="cc">/* Square product images */</span>
-.<span class="cf">shop-collection</span> .product-small .box-image {
-  aspect-ratio: <span class="num">1</span> / <span class="num">1</span>;
-  overflow: hidden;
-}
-.<span class="cf">shop-collection</span> .product-small .box-image img {
-  width: <span class="num">100%</span>;
-  height: <span class="num">100%</span>;
-  object-fit: cover;
-}</pre></div>
-      <div style="border-top: 0.5px solid var(--warm-light); padding: 0.75rem 1.25rem; background: var(--white); align-items: center;">
-        <img src="images/woocommerce-collection-live.jpg" alt="Shop the Collection block live on photobubble.co.uk" style="width: 70%; display: block; margin: 0 auto; border: 1px solid var(--warm-light);">
-        <p style="font-family: var(--mono); font-size: 0.55rem; color: var(--warm-mid); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 0.5rem; text-align: center;">Live result — photobubble.co.uk</p>
+    <section id="contact" aria-labelledby="contact-title">
+      <div class="contact reveal">
+        <div>
+          <span class="section-number">06</span>
+          <h2 id="contact-title">Let the work land somewhere <em>useful</em>.</h2>
+          <p>If you are looking for someone who can own a product pipeline from design interpretation to live ecommerce deployment, get in touch.</p>
+        </div>
+        <div class="contact-links">
+          <a href="mailto:jjwrightson00@gmail.com">jjwrightson00@gmail.com <span class="code-label">Email</span></a>
+          <a href="https://www.linkedin.com/in/jasmine-wrightson-81663322a/" target="_blank" rel="noopener">linkedin.com/in/jasmine-wrightson <span class="code-label">LinkedIn</span></a>
+          <a href="Jasmine-Wrightson_CV.pdf" download>Download CV <span class="code-label">PDF</span></a>
+        </div>
       </div>
-    </div>
+    </section>
+  </main>
 
-  </div>
-</section>
-
-<!-- ── CONTACT ── -->
-<section id="contact">
-  <div class="section-header reveal">
-    <span class="section-num">05</span>
-    <h2 class="section-title">Get in <em>touch</em></h2>
-  </div>
-  <div class="contact-inner reveal">
-    <p class="contact-text">If you're looking for someone who can own a product pipeline from <em>design to deployment</em>, let's talk.</p>
-    <div class="contact-links">
-      <a href="mailto:jjwrightson00@gmail.com" class="contact-link">
-        jjwrightson00@gmail.com
-        <span class="contact-link-label">Email</span>
-      </a>
-      <a href="https://www.linkedin.com/in/jasmine-wrightson-81663322a/" class="contact-link" target="_blank" rel="noopener">
-        linkedin.com/in/jasmine-wrightson
-        <span class="contact-link-label">LinkedIn ↗</span>
-      </a>
-      <a href="Jasmine-Wrightson-CV.pdf" class="contact-link" download>
-        Download CV
-        <span class="contact-link-label">PDF</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ── FOOTER ── -->
-<footer>
-  <span class="footer-copy">© 2026 Jasmine Wrightson</span>
-  <span class="footer-copy">Developer — UK</span>
-</footer>
+  <footer>
+    <span class="footer-copy">© 2026 Jasmine Wrightson</span>
+    <span class="footer-copy">Developer - UK</span>
+  </footer>
 
 <script>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        setTimeout(() => { entry.target.classList.add('visible'); }, 80);
+        entry.target.classList.add("visible");
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.12 });
 
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 </script>
 </body>
 </html>
