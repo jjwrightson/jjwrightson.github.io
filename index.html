@@ -240,31 +240,38 @@
   .proof-panel span { color: var(--muted); }
 
   .metrics {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border-bottom: 1px solid var(--line);
-  }
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid var(--line);
+  background: #DDE5DE; /* new soft green base */
+}
 
-  .metric {
+.metric {
   min-height: 150px;
   padding: clamp(1rem, 2.4vw, 2rem);
-  border-right: 1px solid var(--line);
+  border-right: 1px solid rgba(49, 95, 82, 0.15);
   display: grid;
   align-content: center;
   gap: 0.35rem;
-  background: #2E5241;
+  background: transparent; /* remove block feel */
 }
 
-  .metric:last-child { border-right: 0; }
+.metric:last-child {
+  border-right: 0;
+}
 
-  .metric strong {
-    font-family: var(--serif);
-    font-size: clamp(2.4rem, 5vw, 4rem);
-    font-weight: 400;
-    line-height: 0.95;
-    color: #F8F5EE;
-  }
- .metric .meta-label { color: rgba(248, 245, 238, 0.65); }
+.metric strong {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 500;
+  line-height: 0.95;
+  color: #315f52; /* your green */
+  letter-spacing: -0.5px;
+}
+
+.metric .meta-label {
+  color: rgba(49, 95, 82, 0.7);
+}
 
   .meta-label {
     color: var(--muted);
